@@ -1,0 +1,1995 @@
+<!DOCTYPE html>
+<!-- Region Operation West Java Portal — created by Indri Savitri -->
+<html lang="id">
+<head>
+<meta name="author" content="Indri Savitri">
+<meta name="creator" content="Indri Savitri">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Region Operation West Java Portal</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231e40af'/%3E%3Cpath d='M14 44V22l9 14 9-14 9 14 9-14v22' stroke='%23fbbf24' stroke-width='5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="config.js"></script>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<script>try{var u=(window.PORTAL_CONFIG||{}).SUPABASE_URL;if(u){var l=document.createElement('link');l.rel='preconnect';l.href=u;l.crossOrigin='';document.head.appendChild(l);}}catch(e){}</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.0/dist/umd/supabase.js"></script>
+<style>
+:root{
+  --side:#0b1730; --side2:#12224a; --side-text:#c7d2fe; --side-muted:#7c8db8;
+  --primary:#1e40af; --primary-2:#2563eb; --accent:#fbbf24;
+  --bg:#f3f5fa; --card:#fff; --text:#0f172a; --muted:#64748b; --line:#e2e8f0;
+  --ok:#059669; --warn:#d97706; --bad:#dc2626;
+  --radius:12px; --side-w:240px; --rail-w:64px;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{font-family:"Plus Jakarta Sans",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--text);font-size:14px}
+button,input,select{font:inherit}
+.hidden{display:none!important}
+
+/* ---------- LOGIN ---------- */
+#login{min-height:100%;display:grid;grid-template-columns:1.1fr 1fr}
+.login-brand{background:radial-gradient(1200px 600px at -10% -10%,#2563eb 0%,transparent 60%),radial-gradient(900px 500px at 110% 110%,#7c3aed55 0%,transparent 60%),var(--side);color:#fff;padding:56px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+.login-brand::after{content:"";position:absolute;inset:0;background-image:linear-gradient(#ffffff0a 1px,transparent 1px),linear-gradient(90deg,#ffffff0a 1px,transparent 1px);background-size:40px 40px;pointer-events:none}
+.logo{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.2px}
+.logo-mark{width:42px;height:42px;border-radius:11px;background:linear-gradient(135deg,var(--primary),var(--primary-2));display:grid;place-items:center;box-shadow:0 6px 20px #2563eb55;flex:none}
+.logo-mark svg{width:26px;height:26px}
+.login-brand h1{font-size:40px;line-height:1.12;margin:0 0 14px;font-weight:800;max-width:520px}
+.login-brand h1 span{color:var(--accent)}
+.login-brand p{color:#c7d2fe;max-width:460px;line-height:1.6;margin:0}
+.brand-foot{font-size:12px;color:#94a3b8;position:relative;z-index:1}
+.login-form-wrap{display:grid;place-items:center;padding:40px 24px}
+.login-card{width:100%;max-width:380px}
+.login-card h2{font-size:24px;margin:0 0 6px}
+.login-card .sub{color:var(--muted);margin:0 0 28px}
+.field{margin-bottom:16px}
+.field label{display:block;font-weight:600;font-size:13px;margin-bottom:6px}
+.input{width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:10px;background:#fff;outline:none;transition:.15s}
+.input:focus{border-color:var(--primary-2);box-shadow:0 0 0 3px #2563eb22}
+.pw-wrap{position:relative}
+.pw-wrap .input{padding-right:44px}
+.pw-toggle{position:absolute;right:6px;top:50%;transform:translateY(-50%);border:0;background:none;cursor:pointer;color:var(--muted);padding:6px;border-radius:6px}
+.btn{text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--line);background:#fff;color:var(--text);padding:9px 14px;border-radius:10px;cursor:pointer;font-weight:600;transition:.15s;white-space:nowrap}
+.btn:hover{background:#f8fafc;border-color:#cbd5e1}
+.btn:disabled{opacity:.55;cursor:not-allowed}
+.btn-primary{background:var(--primary);border-color:var(--primary);color:#fff}
+.btn-primary:hover{background:var(--primary-2);border-color:var(--primary-2)}
+.btn-danger{color:var(--bad);border-color:#fecaca}
+.btn-danger:hover{background:#fef2f2;border-color:#fca5a5}
+.btn-block{width:100%;padding:12px}
+.btn-sm{padding:6px 10px;font-size:12.5px;border-radius:8px}
+.btn-icon{padding:7px;width:34px;height:34px}
+.alert{padding:11px 13px;border-radius:10px;font-size:13px;margin-bottom:16px;line-height:1.45}
+.alert-err{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
+.alert-warn{background:#fffbeb;color:#92400e;border:1px solid #fde68a}
+.alert-info{background:#eff6ff;color:#1e3a8a;border:1px solid #bfdbfe}
+.t-sub{font-size:12px;color:var(--muted)}
+.pin-input{letter-spacing:8px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:18px;text-align:center}
+.pin-input::placeholder{letter-spacing:1px;font-family:inherit;font-size:14px}
+.divider{height:1px;background:var(--line);margin:22px 0 16px}
+.link-btn{background:none;border:0;color:var(--primary-2);font-weight:600;cursor:pointer;padding:0;font-size:13px}
+.link-btn:hover{text-decoration:underline}
+.login-links{display:flex;justify-content:flex-end;margin:-6px 0 18px}
+.filters{display:flex;gap:10px;align-items:center;margin-bottom:12px;flex-wrap:wrap}
+.filters .input{width:auto;min-width:200px}
+.req-card{border-color:#fde68a;background:#fffbeb;margin-bottom:16px}
+.req-h{padding:12px 16px;font-weight:700;color:#92400e;border-bottom:1px solid #fde68a}
+.req-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 16px;border-bottom:1px solid #fef3c7}
+.req-row:last-child{border-bottom:0}
+.tag{display:inline-block;font-size:10.5px;font-weight:700;padding:2px 7px;border-radius:999px;background:#fef3c7;color:#92400e;margin-left:6px;vertical-align:middle}
+.tag-admin{background:#fef3c7;color:#92400e}.tag-viewer{background:#e0f2fe;color:#075985}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:#f1f5f9;padding:2px 7px;border-radius:6px;font-size:12.5px}
+textarea.input{min-height:150px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;resize:vertical}
+.modal.wide{max-width:860px}
+.scroll-tbl{max-height:320px;overflow:auto;border:1px solid var(--line);border-radius:10px}
+.scroll-tbl .tbl th{position:sticky;top:0}
+.ok-t{color:var(--ok);font-weight:600}.bad-t{color:var(--bad);font-weight:600}.muted-t{color:var(--muted)}
+
+/* ---------- APP LAYOUT ---------- */
+#app{display:flex;height:100vh;overflow:hidden}
+#sidebar{width:var(--side-w);background:var(--side);color:var(--side-text);display:flex;flex-direction:column;flex:none;transition:width .2s ease;position:relative;z-index:30}
+.side-head{padding:18px 16px 14px;display:flex;align-items:center;gap:11px;border-bottom:1px solid #ffffff12}
+.side-head .t1{font-weight:800;color:#fff;font-size:13.5px;line-height:1.25}
+.side-head .t2{font-size:11px;color:var(--side-muted);margin-top:2px}
+.side-search{padding:12px 14px 6px}
+.side-search input{width:100%;background:#ffffff0d;border:1px solid #ffffff14;color:#fff;padding:8px 10px 8px 32px;border-radius:9px;outline:none;font-size:13px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%237c8db8' stroke-width='2' viewBox='0 0 24 24'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-3.5-3.5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:10px center}
+.side-search input::placeholder{color:var(--side-muted)}
+.side-search input:focus{border-color:#3b82f6}
+.side-nav{flex:1;overflow-y:auto;padding:6px 10px 12px}
+.side-nav::-webkit-scrollbar{width:6px}.side-nav::-webkit-scrollbar-thumb{background:#ffffff1f;border-radius:6px}
+.nav-group{margin-top:12px}
+.nav-group-title{font-size:10.5px;text-transform:uppercase;letter-spacing:1.1px;color:var(--side-muted);font-weight:700;padding:6px 10px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;border-radius:6px}
+.nav-group-title:hover{color:#c7d2fe}
+.nav-group-title .chev{transition:transform .15s}
+.nav-group.collapsed .chev{transform:rotate(-90deg)}
+.nav-group.collapsed .nav-items{display:none}
+.nav-item{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:9px;color:var(--side-text);cursor:pointer;text-decoration:none;font-weight:500;font-size:13.2px;line-height:1.3;margin:2px 0;border:1px solid transparent}
+.nav-item:hover{background:#ffffff0d;color:#fff}
+.nav-item.active{background:linear-gradient(90deg,#2563eb40,#2563eb14);border-color:#3b82f655;color:#fff}
+.nav-item.active .nav-ic{background:var(--primary-2)}
+.nav-ic{width:28px;height:28px;border-radius:8px;background:#ffffff10;display:grid;place-items:center;flex:none;font-size:15px}
+.nav-label{overflow-wrap:anywhere;line-height:1.35}
+.nav-note{display:block;font-size:10.8px;font-weight:500;color:#fbbf24;opacity:.9;margin-top:1px;line-height:1.25}
+.tile-note{font-size:12px;color:#b45309;font-weight:600;margin:2px 0 1px}
+body.rail #sidebar:not(:hover) .nav-note{display:none}
+.nav-item{align-items:flex-start}.nav-item .nav-ic{margin-top:-1px}
+/* menu kiri ringkas agar banyak dashboard muat */
+.side-head{padding:12px 14px 10px;gap:10px}
+.side-head .logo-mark{width:34px;height:34px;border-radius:9px}.side-head .logo-mark svg{width:21px;height:21px}
+.side-head .t1{font-size:12.5px;white-space:nowrap}.side-head .t2{font-size:10.5px}
+.side-search{padding:8px 10px 4px}.side-search input{padding:7px 10px 7px 30px;font-size:12.5px}
+.side-top{padding:2px 8px 4px}.side-top .side-btn{padding:6px 10px;font-size:12.5px}
+.side-nav{padding:4px 8px 10px;mask-image:linear-gradient(#000 calc(100% - 22px),transparent);-webkit-mask-image:linear-gradient(#000 calc(100% - 22px),transparent)}
+.side-nav.at-end{mask-image:none;-webkit-mask-image:none}
+.nav-group{margin-top:4px}.nav-group-title{display:none}
+[data-nav]{cursor:pointer}
+.nav-item{padding:6px 8px;gap:9px;font-size:12.6px;line-height:1.28;margin:1px 0}
+.nav-ic{width:24px;height:24px;border-radius:7px;font-size:13px}
+.side-foot{padding:6px 8px 8px}.side-foot .user-chip{padding:2px}
+.side-foot .avatar{width:30px;height:30px;font-size:12px}
+.user-name{font-size:12.5px}.role-badge{font-size:9.5px;padding:1px 6px;margin-top:2px}
+/* Beranda & Panel Admin berdampingan (hemat 1 baris) */
+.side-top{display:flex;gap:4px}.side-top .side-btn{flex:1;justify-content:flex-start;min-width:0}
+.side-top .side-btn span{overflow:hidden;text-overflow:ellipsis}
+/* mode padat otomatis bila daftar tidak muat */
+#sidebar.dense .side-head .t2{display:none}
+#sidebar.dense .side-head{padding:9px 12px 8px}
+#sidebar.dense .nav-item{padding:4px 8px;font-size:12.2px;line-height:1.22}
+#sidebar.dense .nav-ic{width:22px;height:22px;font-size:12px;margin-top:0}
+#sidebar.xdense .nav-item{padding:3px 8px;font-size:11.8px;margin:0}
+#sidebar.xdense .nav-ic{width:20px;height:20px;font-size:11px}
+#sidebar.xdense .side-search{padding:6px 10px 2px}#sidebar.xdense .side-search input{padding:5px 10px 5px 30px}
+.side-top{padding:4px 10px 6px;border-bottom:1px solid #ffffff12}
+.side-foot .user-chip{padding:2px 2px}
+.foot-icons{display:flex;gap:2px;flex:none}
+.foot-ic{width:32px;height:32px;display:grid;place-items:center;border:0;background:none;color:var(--side-text);border-radius:8px;cursor:pointer}
+.foot-ic:hover{background:#ffffff14;color:#fff}
+.foot-ic svg{width:17px;height:17px}
+#btnLogout:hover{color:#fca5a5}
+.nav-item.inactive{opacity:.5}
+.nav-item.inactive .nav-label::after{content:" · nonaktif";font-size:11px;color:#fca5a5}
+.nav-empty{padding:16px 10px;color:var(--side-muted);font-size:12.5px;line-height:1.5}
+.side-sep{height:1px;background:#ffffff12;margin:10px 4px}
+.side-foot{border-top:1px solid #ffffff12;padding:12px}
+.user-chip{display:flex;align-items:center;gap:10px;padding:6px 4px 10px}
+.side-foot{padding:10px 10px 12px}
+.avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;display:grid;place-items:center;font-weight:800;font-size:13px;flex:none}
+.user-name{color:#fff;font-weight:700;font-size:13px;line-height:1.25;overflow-wrap:anywhere}
+.role-badge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;padding:2px 7px;border-radius:999px;margin-top:3px}
+.role-admin{background:#fbbf2426;color:#fbbf24}
+.role-viewer{background:#38bdf826;color:#7dd3fc}
+.side-btn{width:100%;display:flex;align-items:center;gap:10px;background:none;border:0;color:var(--side-text);padding:7px 10px;white-space:nowrap;border-radius:9px;cursor:pointer;font-weight:600;font-size:13px}
+.side-btn:hover{background:#ffffff0d;color:#fff}
+.side-btn.active{background:#fbbf241f;color:#fbbf24}
+.side-btn svg{width:18px;height:18px;flex:none}
+
+/* collapsed sidebar */
+/* rail: menu mengecil saat dashboard dibuka, melebar saat kursor diarahkan */
+@media (min-width:901px){
+body.rail #sidebar{position:fixed;left:0;top:0;bottom:0;width:var(--rail-w);transition:width .18s ease .15s, box-shadow .18s ease .15s}
+body.rail #main{margin-left:var(--rail-w)}
+body.rail #sidebar:hover:not(.closing){width:var(--side-w);box-shadow:12px 0 40px #0f172a59;transition-delay:.08s}
+body.rail #sidebar:not(:hover) .side-head .txt,body.rail #sidebar.closing .side-head .txt,body.rail #sidebar:not(:hover) .side-search,body.rail #sidebar.closing .side-search,body.rail #sidebar:not(:hover) .nav-group-title,body.rail #sidebar.closing .nav-group-title,body.rail #sidebar:not(:hover) .nav-label,body.rail #sidebar.closing .nav-label,body.rail #sidebar:not(:hover) .user-meta,body.rail #sidebar.closing .user-meta,body.rail #sidebar:not(:hover) .side-btn span,body.rail #sidebar.closing .side-btn span{display:none}
+body.rail #sidebar:not(:hover) .side-head,body.rail #sidebar.closing .side-head{justify-content:center;padding-left:0;padding-right:0}
+body.rail #sidebar:not(:hover) .nav-item,body.rail #sidebar.closing .nav-item{justify-content:center;padding:8px 0}
+body.rail #sidebar:not(:hover) .user-chip,body.rail #sidebar.closing .user-chip{justify-content:center}
+body.rail #sidebar:not(:hover) .foot-icons,body.rail #sidebar.closing .foot-icons{display:none}
+body.rail #sidebar:not(:hover) .nav-item > svg,body.rail #sidebar.closing .nav-item > svg{display:none}
+body.rail #sidebar:not(:hover) .side-top,body.rail #sidebar.closing .side-top{padding-left:4px;padding-right:4px}
+body.rail #sidebar:not(:hover) .side-btn,body.rail #sidebar.closing .side-btn{justify-content:center}
+body.rail #sidebar:not(:hover) .nav-items,body.rail #sidebar.closing .nav-items{display:block!important}
+body.rail #sidebar:not(:hover) .side-nav,body.rail #sidebar.closing .side-nav{scrollbar-width:none}
+}
+
+#main{flex:1;display:flex;flex-direction:column;min-width:0}
+.topbar{height:58px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;padding:0 16px;flex:none}
+.top-title{flex:1;min-width:0}
+.top-title .h{font-weight:700;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.top-title .m{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.top-actions{display:flex;gap:6px}
+.content{flex:1;position:relative;min-height:0}
+#frame{position:absolute;inset:0;width:100%;height:100%;border:0;background:#fff}
+.overlay{position:absolute;inset:0;display:grid;place-items:center;background:var(--bg);z-index:5}
+.spinner{width:42px;height:42px;border-radius:50%;border:4px solid #dbeafe;border-top-color:var(--primary-2);animation:spin .8s linear infinite;margin:0 auto 14px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.overlay .msg{text-align:center;color:var(--muted)}
+.overlay .msg b{color:var(--text);display:block;margin-bottom:4px}
+
+/* home */
+.home{position:absolute;inset:0;overflow:auto;padding:32px}
+.home h2{margin:0 0 4px;font-size:22px}
+.home .lead{color:var(--muted);margin:0 0 24px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.tile{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:16px;cursor:pointer;transition:.15s;display:flex;gap:12px;align-items:flex-start}
+.tile:hover{border-color:#93c5fd;box-shadow:0 8px 24px #1e40af14;transform:translateY(-1px)}
+.tile .nav-ic{background:#eff6ff;width:40px;height:40px;font-size:20px;border-radius:10px}
+.tile .tt{font-weight:700;line-height:1.3}
+.tile .tm{font-size:12px;color:var(--muted);margin-top:4px}
+/* Beranda dengan gambar latar */
+.home.has-bg{background-color:#dbe7f5;background-image:linear-gradient(180deg,rgba(243,247,252,.78) 0%,rgba(243,247,252,.35) 38%,rgba(243,247,252,0) 62%),var(--home-bg);background-size:cover;background-position:center 72%;background-repeat:no-repeat}
+.home.has-bg h2{color:#0b1730;text-shadow:0 1px 12px rgba(255,255,255,.8)}
+.home.has-bg .lead{color:#1e293b;text-shadow:0 1px 10px rgba(255,255,255,.9)}
+.home.has-bg .tile{background:rgba(255,255,255,.84);border-color:rgba(255,255,255,.7);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 6px 22px rgba(15,23,42,.10)}
+.home.has-bg .tile:hover{background:rgba(255,255,255,.96);border-color:#93c5fd}
+.home.has-bg .card.empty-state{background:rgba(255,255,255,.86);backdrop-filter:blur(8px)}
+.contacts{margin-top:22px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:#fff;font-size:12.5px;color:var(--muted);line-height:1.5}
+.contacts b{color:var(--text)}
+.contact-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.contacts.bare{display:inline-block;padding:8px 10px}.contacts.bare .contact-list{margin-top:0}
+.contact{display:inline-flex;align-items:center;gap:8px;padding:6px 10px 6px 6px;border-radius:999px;background:#f1f5f9;color:var(--text);text-decoration:none;font-weight:600;font-size:12.5px}
+a.contact:hover{background:#e0e7ff;color:#1e3a8a}
+.contact .av{width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#2563eb,#7c3aed);color:#fff;display:grid;place-items:center;font-size:11px;font-weight:800;flex:none}
+.contact small{font-weight:500;color:var(--muted)}
+.home .contacts{max-width:720px;background:rgba(255,255,255,.86);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.nav-others-btn{width:100%;display:flex;align-items:center;gap:9px;background:none;border:1px dashed #ffffff26;color:var(--side-text);padding:6px 8px;border-radius:9px;cursor:pointer;font:inherit;font-weight:600;font-size:12.6px;margin-top:6px;text-align:left}
+.nav-others-btn:hover{background:#ffffff0d;color:#fff}
+.nav-others-btn .nav-ic{background:#ffffff10}
+.nav-others-btn .cnt{margin-left:auto;font-size:11px;color:var(--side-muted);font-weight:600}
+.nav-others-btn .chev{transition:transform .15s;flex:none}
+.nav-others.open .nav-others-btn .chev{transform:rotate(90deg)}
+.nav-others .nav-items{display:none;padding-left:10px;border-left:1px solid #ffffff1a;margin:2px 0 0 13px}
+.nav-others.open .nav-items{display:block}
+body.rail #sidebar:not(:hover) .nav-others-btn .cnt,body.rail #sidebar:not(:hover) .nav-others-btn .chev,body.rail #sidebar:not(:hover) .nav-others-btn .lbl{display:none}
+body.rail #sidebar:not(:hover) .nav-others-btn{justify-content:center;border-style:solid}
+body.rail #sidebar:not(:hover) .nav-others .nav-items{margin-left:0;padding-left:0;border:0}
+.nav-others-btn.act{border-style:solid;border-color:#fbbf2466;background:#ffffff12;color:#fff}
+.oth-pop{position:fixed;z-index:9000;width:300px;max-width:calc(100vw - 20px);max-height:min(70vh,520px);display:flex;flex-direction:column;background:#fff;color:#0f172a;border-radius:14px;box-shadow:0 18px 50px rgba(2,6,23,.35),0 2px 8px rgba(2,6,23,.15);border:1px solid #e2e8f0;overflow:hidden;animation:othIn .12s ease-out}
+@keyframes othIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+.oth-pop-h{display:flex;align-items:center;justify-content:space-between;padding:10px 12px 8px 14px;font-weight:700;font-size:13.5px;border-bottom:1px solid #eef2f7}
+.oth-pop-x{background:none;border:0;cursor:pointer;font-size:14px;color:#64748b;padding:4px 6px;border-radius:6px}.oth-pop-x:hover{background:#f1f5f9}
+.oth-pop-b{overflow:auto;padding:6px}
+.oth-pop-i{display:flex;align-items:flex-start;gap:10px;padding:8px 9px;border-radius:9px;color:inherit;text-decoration:none;font-weight:600;font-size:13px;line-height:1.3}
+.oth-pop-i:hover{background:#f1f5f9}.oth-pop-i.inactive{opacity:.6}
+.oth-pop-i .nav-ic{background:#eef2ff;flex:none}
+.oth-pop-t{flex:1;min-width:0;overflow-wrap:anywhere}.oth-pop-t small{display:block;font-weight:500;font-size:11.5px;color:#b45309;margin-top:2px}
+.oth-pop-i svg{flex:none;margin-top:3px;color:#64748b}
+.home-others{margin-top:18px}
+.home-others > button{background:rgba(255,255,255,.86);border:1px solid rgba(255,255,255,.7);border-radius:10px;padding:8px 12px;font:inherit;font-weight:700;cursor:pointer;display:inline-flex;gap:8px;align-items:center;backdrop-filter:blur(8px)}
+.home-others .grid{display:none;margin-top:12px}.home-others.open .grid{display:grid}
+.tag-oth{background:#e2e8f0;color:#334155}
+.cat-chip{display:inline-block;font-size:11px;font-weight:600;color:#1e40af;background:#eff6ff;border-radius:999px;padding:2px 8px;margin-top:8px}
+
+/* admin */
+.admin{position:absolute;inset:0;overflow:auto;padding:28px 32px 40px}
+.admin-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:18px;flex-wrap:wrap}
+.admin-head h2{margin:0;font-size:22px}
+.admin-head p{margin:4px 0 0;color:var(--muted)}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin-bottom:18px}
+.tab{padding:10px 14px;border:0;background:none;cursor:pointer;font-weight:600;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px}
+.tab.active{color:var(--primary);border-bottom-color:var(--primary)}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+table.tbl{width:100%;border-collapse:collapse}
+.tbl th{font-size:11.5px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);text-align:left;padding:11px 14px;background:#f8fafc;border-bottom:1px solid var(--line);font-weight:700}
+.tbl td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:middle}
+.tbl tr:last-child td{border-bottom:0}
+.tbl .t-title{font-weight:700;display:flex;align-items:center;gap:10px}
+.tbl .t-sub{font-size:12px;color:var(--muted);margin-top:2px}
+.tbl .acts{display:flex;gap:6px;justify-content:flex-end;flex-wrap:nowrap}
+.order-btns{display:flex;flex-direction:column;gap:2px}
+.order-btns button{border:1px solid var(--line);background:#fff;border-radius:6px;cursor:pointer;width:24px;height:18px;line-height:1;font-size:10px;color:var(--muted);padding:0}
+.order-btns button:hover:not(:disabled){background:#eff6ff;color:var(--primary)}
+.order-btns button:disabled{opacity:.3;cursor:default}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:3px 9px;border-radius:999px}
+.pill::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.pill-ok{background:#ecfdf5;color:var(--ok)}
+.pill-off{background:#f1f5f9;color:#94a3b8}
+.pill-warn{background:#fffbeb;color:var(--warn)}
+.empty-state{padding:40px;text-align:center;color:var(--muted)}
+.help{font-size:12.5px;color:var(--muted);line-height:1.55;margin-top:14px}
+.help code{background:#f1f5f9;padding:1px 5px;border-radius:4px;color:#334155}
+
+/* modal */
+.modal-back{position:fixed;inset:0;background:#0f172a80;display:grid;place-items:center;z-index:100;padding:20px;backdrop-filter:blur(2px)}
+.modal{background:#fff;border-radius:16px;width:100%;max-width:520px;max-height:92vh;overflow:auto;box-shadow:0 30px 80px #0f172a55}
+.modal-h{padding:18px 22px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+.modal-h h3{margin:0;font-size:17px}
+.modal-b{padding:20px 22px}
+.modal-f{padding:14px 22px;border-top:1px solid var(--line);display:flex;justify-content:flex-end;gap:8px;background:#f8fafc}
+.row2{display:grid;grid-template-columns:1fr 110px;gap:12px}
+.drop{border:2px dashed #cbd5e1;border-radius:12px;padding:20px;text-align:center;color:var(--muted);cursor:pointer;transition:.15s;background:#f8fafc}
+.drop:hover,.drop.over{border-color:var(--primary-2);background:#eff6ff;color:var(--primary)}
+.drop b{color:var(--text)}
+.drop .fname{margin-top:8px;font-weight:600;color:var(--primary)}
+.check{display:flex;align-items:center;gap:8px;font-weight:600;font-size:13px;cursor:pointer}
+.check input{width:16px;height:16px}
+.progress{height:6px;background:#e2e8f0;border-radius:6px;overflow:hidden;margin-top:12px}
+.progress>div{height:100%;width:0;background:var(--primary-2);transition:width .2s}
+
+/* toast */
+#toasts{position:fixed;right:18px;bottom:18px;display:flex;flex-direction:column;gap:8px;z-index:200}
+.toast{background:#0f172a;color:#fff;padding:11px 14px;border-radius:10px;font-size:13px;box-shadow:0 10px 30px #0f172a40;max-width:360px;animation:tin .2s ease;line-height:1.4}
+.toast.err{background:#991b1b}.toast.ok{background:#065f46}
+@keyframes tin{from{transform:translateY(8px);opacity:0}}
+
+.mobile-only{display:none}
+#scrim{display:none}
+@media (max-width:900px){
+  #login{grid-template-columns:1fr}
+  .login-brand{padding:32px;min-height:220px}
+  .login-brand h1{font-size:28px}
+  #sidebar{position:fixed;left:0;top:0;bottom:0;transform:translateX(-100%);transition:transform .2s;width:280px!important}
+  body.side-open #sidebar{transform:none}
+  body.side-open #scrim{display:block;position:fixed;inset:0;background:#0f172a66;z-index:25}
+  .mobile-only{display:inline-flex}
+  .desk-only{display:none}
+  .home,.admin{padding:20px 16px}
+  .tbl .hide-sm{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ================= LOGIN ================= -->
+<section id="login" class="hidden">
+  <div class="login-brand">
+    <div class="logo" style="position:relative;z-index:1">
+      <div class="logo-mark"><svg viewBox="0 0 64 64"><path d="M10 46V20l11 16 11-16 11 16 11-16v26" stroke="#fbbf24" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div>REGION OPERATION · WEST JAVA</div>
+    </div>
+    <div style="position:relative;z-index:1">
+      <h1 id="brandTitle">Region Operation<br><span>West Java</span> Portal</h1>
+      <p id="brandSub">Satu pintu untuk seluruh dashboard operasional regional — performa, program, dan rekomendasi wilayah.</p>
+    </div>
+    <div class="brand-foot">Akses terbatas · Satu akun hanya bisa aktif di satu perangkat</div>
+  </div>
+  <div class="login-form-wrap">
+    <form class="login-card" id="loginForm" autocomplete="on">
+      <h2>Masuk</h2>
+      <p class="sub">Gunakan akun yang diberikan oleh Admin Region.</p>
+      <div id="loginAlert"></div>
+      <div class="field">
+        <label for="lgUser">Username / Email</label>
+        <input class="input" id="lgUser" name="username" autocomplete="username" required placeholder="mis. budi">
+      </div>
+      <div class="field">
+        <label for="lgPass">Password</label>
+        <div class="pw-wrap">
+          <input class="input" id="lgPass" name="password" type="password" autocomplete="current-password" required placeholder="••••••••">
+          <button type="button" class="pw-toggle" id="pwToggle" aria-label="Tampilkan password">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="login-links"><button type="button" class="link-btn" id="lnkForgot">Lupa password?</button></div>
+      <button class="btn btn-primary btn-block" id="lgBtn" type="submit">Masuk</button>
+    </form>
+    <form class="login-card hidden" id="forgotForm" autocomplete="off">
+      <h2>Reset password</h2>
+      <p class="sub">Masukkan username, PIN pemulihan 6 digit, dan password baru Anda.</p>
+      <div id="forgotAlert"></div>
+      <div class="field"><label for="fgUser">Username</label><input class="input" id="fgUser" required autocomplete="username" placeholder="mis. budi"></div>
+      <div class="field"><label for="fgPin">PIN pemulihan</label><input class="input pin-input" id="fgPin" required inputmode="numeric" maxlength="6" autocomplete="off" placeholder="6 digit angka"></div>
+      <div class="field"><label for="fgPw1">Password baru</label><input class="input" id="fgPw1" type="password" required autocomplete="new-password" placeholder="Minimal 6 karakter"></div>
+      <div class="field"><label for="fgPw2">Ulangi password baru</label><input class="input" id="fgPw2" type="password" required autocomplete="new-password"></div>
+      <button class="btn btn-primary btn-block" id="fgBtn" type="submit">Reset password</button>
+      <div class="divider"></div>
+      <div style="text-align:center;font-size:13px;color:var(--muted)">Belum punya / lupa PIN? <button type="button" class="link-btn" id="lnkAskAdmin">Minta reset ke Admin</button></div>
+      <div style="text-align:center;margin-top:14px"><button type="button" class="link-btn" id="lnkBack">← Kembali ke halaman masuk</button></div>
+    </form>
+  </div>
+</section>
+
+<!-- ================= APP ================= -->
+<section id="app" class="hidden">
+  <aside id="sidebar">
+    <div class="side-head">
+      <div class="logo-mark" id="sideLogo"><svg viewBox="0 0 64 64"><path d="M10 46V20l11 16 11-16 11 16 11-16v26" stroke="#fbbf24" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="txt"><div class="t1" id="sideTitle">Region Operation<br>West Java Portal</div><div class="t2" id="sideSub"></div></div>
+    </div>
+    <div class="side-search"><input id="navSearch" placeholder="Cari dashboard…" autocomplete="off"></div>
+    <div class="side-top">
+      <button class="side-btn" id="btnHome" title="Beranda">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m3 11 9-8 9 8"/><path d="M5 10v10h14V10"/></svg><span>Beranda</span>
+      </button>
+      <button class="side-btn hidden" id="btnAdmin" title="Panel Admin">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg><span>Admin</span>
+      </button>
+    </div>
+    <nav class="side-nav" id="nav"></nav>
+    <div class="side-foot">
+      <div class="user-chip">
+        <div class="avatar" id="uAvatar">A</div>
+        <div class="user-meta" style="min-width:0;flex:1">
+          <div class="user-name" id="uName">—</div>
+          <span class="role-badge" id="uRole">viewer</span> <div class="t-sub" id="uPosTxt" style="color:var(--side-muted);font-size:11px;margin-top:3px;line-height:1.3"></div>
+        </div>
+        <div class="foot-icons">
+          <button class="foot-ic" id="btnPw" title="Ganti password" aria-label="Ganti password"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></button>
+          <button class="foot-ic" id="btnPin" title="PIN pemulihan" aria-label="PIN pemulihan"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="m10.8 12.2 8.2-8.2M17 6l2 2M15 8l2 2"/></svg></button>
+          <button class="foot-ic" id="btnLogout" title="Keluar" aria-label="Keluar"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 17l5-5-5-5"/><path d="M20 12H9"/><path d="M12 21H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h7"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div id="scrim"></div>
+
+  <main id="main">
+    <header class="topbar">
+      <button class="btn btn-icon mobile-only" id="btnMenu" title="Menu">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      <button class="btn btn-icon desk-only" id="btnCollapse" title="Ciutkan / lebarkan menu">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16"/></svg>
+      </button>
+      <div class="top-title"><div class="h" id="topH">Beranda</div><div class="m" id="topM"></div></div>
+      <div class="top-actions" id="dashActions">
+        <button class="btn btn-sm" id="btnReload" title="Muat ulang data terbaru">
+          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg><span class="desk-only">Muat ulang</span>
+        </button>
+        <button class="btn btn-sm" id="btnNewTab" title="Buka di tab baru">
+          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 4h6v6"/><path d="M20 4 10 14"/><path d="M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/></svg><span class="desk-only">Tab baru</span>
+        </button>
+        <button class="btn btn-sm" id="btnFull" title="Layar penuh">
+          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><span class="desk-only">Layar penuh</span>
+        </button>
+      </div>
+    </header>
+    <div class="content" id="content">
+      <iframe id="frame" title="Dashboard" class="hidden"
+        sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-forms allow-modals allow-downloads"
+        allow="fullscreen; clipboard-write"></iframe>
+      <div class="overlay hidden" id="loading"><div class="msg" style="max-width:520px;padding:0 20px"><div class="spinner"></div><div id="loadErrIc" class="hidden" style="font-size:34px;margin-bottom:8px">⚠️</div><b id="loadingT">Memuat dashboard…</b><span id="loadingS" style="display:block;line-height:1.5"></span><button class="btn btn-sm btn-primary hidden" id="loadRetry" style="margin-top:16px">Coba lagi</button></div></div>
+      <div class="home hidden" id="home"></div>
+      <div class="admin hidden" id="admin"></div>
+    </div>
+  </main>
+</section>
+
+<div id="toasts"></div>
+
+<script>
+(function(){
+'use strict';
+
+/* ============================================================
+ *  CONFIG
+ * ============================================================ */
+const CFG = Object.assign({
+  PORTAL_TITLE:'Region Operation West Java Portal', PORTAL_SUBTITLE:'Dashboard & Monitoring Regional',
+  SUPABASE_URL:'', SUPABASE_ANON_KEY:'', USERNAME_DOMAIN:'wjportal.id',
+  HOME_BG:'', CONTACTS:[], SESSION_MODE:'kick', HEARTBEAT_SECONDS:30, BLOCK_STALE_SECONDS:120, AREAS:[], POSITIONS:[], MIN_PASSWORD:6, CACHE_DASHBOARDS:true, QUOTA_GB:0,
+  STORAGE:'github', GITHUB_REPO:'', GITHUB_BRANCH:'main', GITHUB_DIR:'data', GITHUB_PAGES_URL:'',
+  GITHUB_API:'https://api.github.com', GITHUB_RAW_BASE:'https://raw.githubusercontent.com', GITHUB_KEEP_HISTORY:false, PREFETCH:null
+}, window.PORTAL_CONFIG || {});
+const OTH_ICON = CFG.OTHERS_ICON || '🗂️';
+const OTH_LABEL = CFG.OTHERS_LABEL || 'Others';
+const noteOf = d => (d && d.storage && String(d.storage).startsWith('link') && d.file_name) ? String(d.file_name) : '';
+if(CFG.PREFETCH === null) CFG.PREFETCH = CFG.STORAGE === 'github';
+const DEMO = CFG.DEMO_MODE === true;  // hanya untuk pengujian lokal
+const CONFIGURED = DEMO || !!(CFG.SUPABASE_URL && CFG.SUPABASE_ANON_KEY);
+const SID_KEY = 'wjp-session-id';
+const SID_STORE = DEMO ? sessionStorage : localStorage;  // mode coba: tiap tab bisa login akun berbeda
+const UI_KEY = 'wjp-ui';
+
+const $ = (s, r=document) => r.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const uuid = () => (crypto.randomUUID ? crypto.randomUUID() : 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => { const r = Math.random()*16|0; return (c==='x'?r:(r&3|8)).toString(16); }));
+const fmtSize = (b, zero='—') => !b ? zero : b > 1048576 ? (b/1048576).toFixed(1)+' MB' : Math.max(1, Math.round(b/1024))+' KB';
+const fmtDate = d => { if(!d) return '—'; const x = new Date(d); return x.toLocaleDateString('id-ID',{day:'2-digit',month:'short',year:'numeric'})+' '+x.toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'}); };
+const safeName = n => (n||'dashboard.html').normalize('NFKD').replace(/[^\w.\-]+/g,'_').slice(-80);
+const toEmail = id => { id = id.trim().toLowerCase(); return id.includes('@') ? id : id + '@' + CFG.USERNAME_DOMAIN; };
+const deviceOf = ua => { if(!ua) return '—'; const os = /Windows/.test(ua)?'Windows':/Android/.test(ua)?'Android':/iPhone|iPad/.test(ua)?'iOS':/Mac OS/.test(ua)?'macOS':/Linux/.test(ua)?'Linux':'Lainnya';
+  const br = /Edg\//.test(ua)?'Edge':/OPR\//.test(ua)?'Opera':/Chrome\//.test(ua)?'Chrome':/Firefox\//.test(ua)?'Firefox':/Safari\//.test(ua)?'Safari':'Browser'; return br+' · '+os; };
+async function titleFromFile(file){ try { const head = await file.slice(0, 200000).text(); const m = head.match(/<title[^>]*>([\s\S]*?)<\/title>/i); if(m){ const t=document.createElement('textarea'); t.innerHTML=m[1].trim(); return t.value; } } catch(e){} return file.name.replace(/\.html?$/i,'').replace(/[_-]+/g,' '); }
+
+const genPw = () => { const a = 'abcdefghjkmnpqrstuvwxyz', d = '23456789', r = n => crypto.getRandomValues(new Uint32Array(1))[0] % n; let s = ''; for(let i=0;i<4;i++) s += a[r(a.length)]; for(let i=0;i<4;i++) s += d[r(d.length)]; return s; };
+const normUser = u => String(u||'').trim().toLowerCase().replace(/@.*$/, '');
+function downloadCSV(name, rows){ const csv = '\ufeff' + rows.map(r => r.map(c => { c = String(c ?? ''); return /[",;\n]/.test(c) ? '"' + c.replace(/"/g,'""') + '"' : c; }).join(',')).join('\r\n');
+  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], { type:'text/csv;charset=utf-8' })); a.download = name; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500); }
+/* ---------- kompresi & cache (hemat kuota download) ---------- */
+const canGzip = typeof CompressionStream === 'function' && typeof DecompressionStream === 'function';
+async function packFile(file){
+  if(!canGzip) return { blob:file, path:safeName(file.name), gz:false };
+  const blob = await new Response(file.stream().pipeThrough(new CompressionStream('gzip'))).blob();
+  return { blob:new Blob([blob], { type:'application/gzip' }), path:safeName(file.name) + '.gz', gz:true };
+}
+async function unpack(blob, path){
+  if(!/\.gz$/i.test(path || '')) return blob;
+  return await new Response(blob.stream().pipeThrough(new DecompressionStream('gzip'))).blob();
+}
+const fileCache = {
+  db:null,
+  open(){ return this.db || (this.db = new Promise((res, rej) => { const r = indexedDB.open('wjp-cache', 1); r.onupgradeneeded = () => r.result.createObjectStore('files'); r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); })); },
+  async run(mode, fn){ const db = await this.open(); return new Promise((res, rej) => { const t = db.transaction('files', mode); const q = fn(t.objectStore('files')); t.oncomplete = () => res(q && q.result); t.onerror = () => rej(t.error); }); },
+  async get(id, ver){ if(!CFG.CACHE_DASHBOARDS) return null; try { const r = await this.run('readonly', s => s.get(id)); return r && r.ver === ver ? r : null; } catch(e){ return null; } },
+  async put(id, ver, blob, path){ if(!CFG.CACHE_DASHBOARDS) return; try { await this.run('readwrite', s => s.put({ ver, blob, path, at:Date.now() }, id)); } catch(e){} },
+  async prune(keepIds){ try { const keys = await this.run('readonly', s => s.getAllKeys()); const drop = (keys || []).filter(k => !keepIds.includes(k)); if(drop.length) await this.run('readwrite', s => drop.forEach(k => s.delete(k))); } catch(e){} },
+  async clear(){ try { await this.run('readwrite', s => s.clear()); } catch(e){} },
+};
+
+console.log('%cRegion Operation West Java Portal%c\ncreated by Indri Savitri', 'font:700 14px sans-serif;color:#1e40af', 'font:12px sans-serif;color:#64748b');
+function contactsHtml(title){
+  const list = (CFG.CONTACTS || []).map(c => typeof c === 'string' ? { name:c } : c).filter(c => c && c.name);
+  if(!list.length) return '';
+  const one = c => {
+    const ini = c.name.trim().split(/\s+/).slice(0, 2).map(w => w[0]).join('').toUpperCase();
+    const ph = String(c.phone || c.wa || '').replace(/[^\d+]/g, ''), wa = ph ? ph.replace(/^\+/, '').replace(/^0/, '62') : '';
+    const href = wa ? `https://wa.me/${wa}` : c.email ? `mailto:${c.email}` : '';
+    const sub = [c.role, c.phone || c.wa, c.email].filter(Boolean).map(esc).join(' · ');
+    const inner = `<span class="av">${esc(ini)}</span><span>${esc(c.name)}${sub ? `<br><small>${sub}</small>` : ''}</span>`;
+    return href ? `<a class="contact" href="${esc(href)}" target="_blank" rel="noopener" title="${wa ? 'Chat WhatsApp' : 'Kirim email'}">${inner}</a>` : `<span class="contact">${inner}</span>`;
+  };
+  return `<div class="contacts${title ? '' : ' bare'}">${title}<div class="contact-list">${list.map(one).join('')}</div></div>`;
+}
+function toast(msg, type='', ms=3800){ const el = document.createElement('div'); el.className = 'toast '+type; el.textContent = msg; $('#toasts').appendChild(el); setTimeout(()=>el.remove(), ms); }
+
+/* ============================================================
+ *  BACKEND: SUPABASE
+ * ============================================================ */
+function SupabaseBackend(){
+  const sb = window.supabase.createClient(CFG.SUPABASE_URL, CFG.SUPABASE_ANON_KEY, {
+    auth:{ persistSession:true, autoRefreshToken:true, storageKey:'wjp-auth' }
+  });
+  const BUCKET = 'dashboards';
+  let uid = null;
+  const must = ({data, error}) => { if(error) throw error; return data; };
+  const authMsg = e => /invalid login/i.test(e.message) ? 'Username atau password salah.' : /email not confirmed/i.test(e.message) ? 'Akun belum dikonfirmasi. Hubungi Admin.' : e.message;
+
+  async function loadProfile(user){
+    uid = user.id;
+    const { data, error } = await sb.from('profiles').select('*').eq('id', user.id).maybeSingle();
+    if(error) throw error;
+    return { user:{ id:user.id, email:user.email }, profile: data || { id:user.id, email:user.email, username:user.email.split('@')[0], role:'viewer' } };
+  }
+  return {
+    async restore(){ const { data } = await sb.auth.getSession(); return data.session ? loadProfile(data.session.user) : null; },
+    async signIn(id, pw){ const { data, error } = await sb.auth.signInWithPassword({ email:toEmail(id), password:pw }); if(error) throw new Error(authMsg(error)); uid = data.user.id; return data.user; },
+    profile(user){ return loadProfile(user); },
+    async signOut(scope='local'){ try { await sb.auth.signOut({ scope }); } catch(e){} },
+    async revokeOthers(){ try { await sb.auth.signOut({ scope:'others' }); } catch(e){} },
+    async claimSession(sid, ua){ return must(await sb.rpc('claim_session', { p_session_id:sid, p_user_agent:ua, p_mode:CFG.SESSION_MODE, p_stale_seconds:CFG.BLOCK_STALE_SECONDS })); },
+    async heartbeat(sid){ return must(await sb.rpc('session_heartbeat', { p_session_id:sid })) === true; },
+    async releaseSession(sid){ try { await sb.rpc('release_session', { p_session_id:sid }); } catch(e){} },
+    watchSession(userId, cb){
+      const ch = sb.channel('sess-'+userId).on('postgres_changes', { event:'UPDATE', schema:'public', table:'user_sessions', filter:'user_id=eq.'+userId }, p => cb(p.new && p.new.session_id)).subscribe();
+      return () => { try { sb.removeChannel(ch); } catch(e){} };
+    },
+    async listDashboards(){ return must(await sb.from('dashboards').select('*').order('sort_order').order('created_at')); },
+    async blobGet(path){ return must(await sb.storage.from(BUCKET).download(path)); },
+    async blobPut(path, blob, type){ must(await sb.storage.from(BUCKET).upload(path, blob, { contentType:type, upsert:false })); },
+    async blobRemove(paths){ await sb.storage.from(BUCKET).remove(paths); },
+    async getDashKey(create){
+      const { data, error } = await sb.from('portal_keys').select('k').eq('id', 'current').maybeSingle(); if(error) throw error;
+      if(data) return data.k;
+      if(!create) throw new Error('Kunci dashboard belum tersedia.');
+      const k = b64enc(crypto.getRandomValues(new Uint8Array(32)));
+      must(await sb.from('portal_keys').insert({ id:'current', k })); return k;
+    },
+    async setDashKey(k){ must(await sb.from('portal_keys').upsert({ id:'current', k, created_at:new Date().toISOString() })); },
+    async getSetting(k){ const { data, error } = await sb.from('admin_settings').select('v').eq('k', k).maybeSingle(); if(error) throw error; return data ? data.v : null; },
+    async setSetting(k, v){ must(await sb.from('admin_settings').upsert({ k, v, updated_at:new Date().toISOString() })); },
+    async logOpen(d, bytes, cached, kind='open'){ try { await sb.rpc('log_dashboard_open', { p_dashboard_id:d.id, p_bytes:bytes, p_cached:cached, p_kind:kind }); } catch(e){} },
+    async activityReport(from, to){ return must(await sb.rpc('admin_activity_report', { p_from:from, p_to:to })); },
+    async usageSummary(){ return must(await sb.rpc('admin_usage_summary')); },
+    async insertRow(row){ return must(await sb.from('dashboards').insert({ ...row, updated_by:uid }).select().single()); },
+    async updateRow(id, patch){ return must(await sb.from('dashboards').update({ ...patch, updated_by:uid }).eq('id', id).select().single()); },
+    async reorder(items){ for(const it of items) must(await sb.from('dashboards').update({ sort_order:it.sort_order }).eq('id', it.id)); },
+    async deleteRow(id){ must(await sb.from('dashboards').delete().eq('id', id)); },
+    async listUsers(){
+      const profiles = must(await sb.from('profiles').select('*').order('created_at'));
+      const sess = must(await sb.from('user_sessions').select('*'));
+      const pins = (await sb.rpc('admin_pin_status')).data || [];
+      const map = Object.fromEntries(sess.map(s => [s.user_id, s])), pm = Object.fromEntries(pins.map(x => [x.user_id, x]));
+      return profiles.map(p => ({ ...p, session: map[p.id] || null, has_pin: !!(pm[p.id] && pm[p.id].has_pin), pin_locked: !!(pm[p.id] && pm[p.id].locked) }));
+    },
+    async updateUser(userId, fields){ must(await sb.from('profiles').update(fields).eq('id', userId)); },
+    async createUser(u){ return must(await sb.rpc('admin_create_user', { p_email:toEmail(u.username), p_username:normUser(u.username), p_password:u.password,
+      p_full_name:u.full_name || null, p_area:u.area || null, p_role:u.role || 'viewer' })); },
+    async createUserFull(u){ const id = await this.createUser(u); const ex = {}; if(u.position) ex.position = u.position; if(u.nik) ex.nik = u.nik; if(Object.keys(ex).length) must(await sb.from('profiles').update(ex).eq('id', id)); return id; },
+    async resetPassword(userId, pw){ must(await sb.rpc('admin_reset_password', { p_user_id:userId, p_new_password:pw })); },
+    async deleteUser(userId){ must(await sb.rpc('admin_delete_user', { p_user_id:userId })); },
+    async requestReset(username){ must(await sb.rpc('request_password_reset', { p_username:normUser(username) })); },
+    async listResetRequests(){ return must(await sb.from('password_reset_requests').select('*').is('resolved_at', null).order('requested_at')); },
+    async dismissReset(id){ must(await sb.from('password_reset_requests').update({ resolved_at:new Date().toISOString() }).eq('id', id)); },
+    async verifyPassword(pw){ const { error } = await sb.auth.signInWithPassword({ email:S.user.email, password:pw }); if(error) throw new Error('Password saat ini salah.'); },
+    async hasRecoveryPin(){ return must(await sb.rpc('has_recovery_pin')) === true; },
+    async setRecoveryPin(pin, curPw){ if(curPw != null) await this.verifyPassword(curPw); must(await sb.rpc('set_recovery_pin', { p_pin:pin })); },
+    async selfReset(username, pin, pw){ return must(await sb.rpc('self_reset_password', { p_username:normUser(username), p_pin:pin, p_new_password:pw })); },
+    async changeOwnPassword(oldPw, newPw){
+      if(oldPw != null){ const { error } = await sb.auth.signInWithPassword({ email:S.user.email, password:oldPw }); if(error) throw new Error('Password lama salah.'); }
+      const { error } = await sb.auth.updateUser({ password:newPw });
+      if(error) throw new Error(/different from the old/i.test(error.message) ? 'Password baru harus berbeda dari password lama.' : /at least|characters/i.test(error.message) ? `Password minimal ${CFG.MIN_PASSWORD} karakter.` : error.message);
+      must(await sb.rpc('mark_password_changed'));
+    },
+    async forceLogout(userId){ must(await sb.rpc('force_logout', { p_user_id:userId })); },
+  };
+}
+
+/* ============================================================
+ *  BACKEND: DEMO (localStorage + IndexedDB, tanpa server)
+ * ============================================================ */
+function DemoBackend(){
+  const K = { auth:'wjp-demo-auth', sess:'wjp-demo-sessions', dash:'wjp-demo-dash', users:'wjp-demo-users', resets:'wjp-demo-resets', log:'wjp-demo-log' };
+  const J = { get:(k,d)=>{ try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch(e){ return d; } }, set:(k,v)=>localStorage.setItem(k, JSON.stringify(v)) };
+  const SEED = [
+    { id:'u-admin',  username:'admin',  password:'admin123',  full_name:'Admin Region',  role:'admin',  area:'' },
+    { id:'u-viewer', username:'viewer', password:'viewer123', full_name:'Viewer Region', role:'viewer', area:'KOTA BANDUNG' },
+  ];
+  const users = () => { let l = J.get(K.users, null); if(!l){ l = SEED.map(u => ({ ...u, email:u.username+'@'+CFG.USERNAME_DOMAIN, must_change_password:false, created_at:new Date().toISOString() })); J.set(K.users, l); } return l; };
+  const saveUsers = l => J.set(K.users, l);
+  const prof = u => { const { password, pin, pin_failed, pin_locked_until, ...p } = u; return p; };
+  const roleOf = u => u.role;
+  const idb = {
+    db:null,
+    open(){ return this.db || (this.db = new Promise((res, rej) => { const r = indexedDB.open('wjp-demo', 1); r.onupgradeneeded = () => r.result.createObjectStore('files'); r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); })); },
+    async tx(mode, fn){ const db = await this.open(); return new Promise((res, rej) => { const t = db.transaction('files', mode); const st = t.objectStore('files'); const r = fn(st); t.oncomplete = () => res(r && r.result); t.onerror = () => rej(t.error); }); },
+    put(k, v){ return this.tx('readwrite', s => s.put(v, k)); }, get(k){ return this.tx('readonly', s => s.get(k)); }, del(k){ return this.tx('readwrite', s => s.delete(k)); },
+  };
+  const me = () => users().find(u => u.id === sessionStorage.getItem(K.auth));
+  const delay = (ms=150) => new Promise(r => setTimeout(r, ms));
+  return {
+    async restore(){ const u = me(); return u ? { user:{ id:u.id, email:u.email }, profile:prof(u) } : null; },
+    async signIn(id, pw){ await delay(150); const e = toEmail(id); const u = users().find(x => x.email === e && x.password === pw); if(!u) throw new Error('Username atau password salah.');
+      sessionStorage.setItem(K.auth, u.id); return { id:u.id, email:u.email }; },
+    async profile(user){ const u = users().find(x => x.id === user.id); return { user:{ id:u.id, email:u.email }, profile:prof(u) }; },
+    async signOut(){ sessionStorage.removeItem(K.auth); },
+    async revokeOthers(){},
+    async claimSession(sid, ua){ const u = me(); const all = J.get(K.sess, {}); const r = all[u.id];
+      if(r && CFG.SESSION_MODE === 'block' && !['revoked','released'].includes(r.session_id) && r.session_id !== sid && Date.now() - r.last_seen < CFG.BLOCK_STALE_SECONDS*1000) return { ok:false, reason:'active_elsewhere' };
+      all[u.id] = { session_id:sid, user_agent:ua, ip:'127.0.0.1', created_at:Date.now(), last_seen:Date.now() }; J.set(K.sess, all);
+      const lg = J.get('wjp-demo-logins', []); lg.push({ u:u.id, t:Date.now(), ip:'127.0.0.1' }); J.set('wjp-demo-logins', lg.slice(-5000)); return { ok:true }; },
+    async heartbeat(sid){ const u = me(); if(!u) return false; const all = J.get(K.sess, {}); const r = all[u.id]; if(!r || r.session_id !== sid) return false; r.last_seen = Date.now(); J.set(K.sess, all); return true; },
+    async releaseSession(sid){ const u = me(); if(!u) return; const all = J.get(K.sess, {}); if(all[u.id] && all[u.id].session_id === sid){ all[u.id].session_id = 'released'; J.set(K.sess, all); } },
+    watchSession(userId, cb){ const h = ev => { if(ev.key === K.sess){ const r = J.get(K.sess, {})[userId]; cb(r && r.session_id); } else if(ev.key === K.auth && !ev.newValue){ cb('released'); } }; window.addEventListener('storage', h); return () => window.removeEventListener('storage', h); },
+    async listDashboards(){ await delay(); const isAdmin = me() && roleOf(me()) === 'admin'; return J.get(K.dash, []).filter(d => d.is_active || isAdmin).sort((a,b) => a.sort_order - b.sort_order); },
+    async blobGet(path){ await delay(100); const b = await idb.get(path); if(!b) throw new Error('File tidak ditemukan.'); return b; },
+    async blobPut(path, blob){ await idb.put(path, blob); },
+    async blobRemove(paths){ for(const p of paths) await idb.del(p); },
+    async getDashKey(create){ let k = localStorage.getItem('wjp-demo-key'); if(!k){ if(!create) throw new Error('Kunci dashboard belum tersedia.'); k = b64enc(crypto.getRandomValues(new Uint8Array(32))); localStorage.setItem('wjp-demo-key', k); } return k; },
+    async setDashKey(k){ localStorage.setItem('wjp-demo-key', k); },
+    async getSetting(k){ return localStorage.getItem('wjp-demo-set-' + k); },
+    async setSetting(k, v){ localStorage.setItem('wjp-demo-set-' + k, v); },
+    async logOpen(d, bytes, cached, kind='open'){ const l = J.get(K.log, []); l.push({ d:d.id, u:me() && me().id, b:bytes, c:cached, k:kind, t:Date.now() }); J.set(K.log, l.slice(-5000)); },
+    async activityReport(from, to){ const f = +new Date(from), t = +new Date(to);
+      const lg = J.get('wjp-demo-logins', []).filter(x => x.t >= f && x.t < t), op = J.get(K.log, []).filter(x => (x.k || 'open') === 'open' && x.t >= f && x.t < t);
+      const agg = (arr, key) => { const m = {}; arr.forEach(x => { const k = key(x); const o = m[k.join('|')] = m[k.join('|')] || { user_id:k[0], dashboard_id:k[1], n:0, last:null }; o.n++; const iso = new Date(x.t).toISOString(); if(!o.last || iso > o.last) o.last = iso; }); return Object.values(m); };
+      const recent = [...lg.map(x => ({ t:'login', user_id:x.u, ip:x.ip, at:new Date(x.t).toISOString() })), ...op.map(x => ({ t:'open', user_id:x.u, dashboard_id:x.d, at:new Date(x.t).toISOString() }))].sort((a,b) => b.at.localeCompare(a.at)).slice(0, 1000);
+      return { logins:agg(lg, x => [x.u]).map(({ dashboard_id, ...o }) => ({ ...o, last_ip:'127.0.0.1' })), opens:agg(op, x => [x.u, x.d]), recent }; },
+    async usageSummary(){ const m0 = new Date(); m0.setDate(1); m0.setHours(0,0,0,0); const l = J.get(K.log, []).filter(x => x.t >= m0.getTime()); const by = {};
+      l.forEach(x => { const o = by[x.d] = by[x.d] || { dashboard_id:x.d, bytes:0, downloads:0, cached:0 }; o.bytes += x.b; x.c ? o.cached++ : o.downloads++; });
+      return { month_bytes:l.reduce((a,x) => a + x.b, 0), downloads:l.filter(x => !x.c).length, cached:l.filter(x => x.c).length, users:new Set(l.map(x => x.u)).size, per_dashboard:Object.values(by) }; },
+    async insertRow(row){ const now = new Date().toISOString(); const r = { ...row, created_at:now, updated_at:now, updated_by:me().id }; const all = J.get(K.dash, []); all.push(r); J.set(K.dash, all); return r; },
+    async updateRow(id, patch){ const all = J.get(K.dash, []); const r = all.find(x => x.id === id); if(!r) throw new Error('Dashboard tidak ditemukan.'); Object.assign(r, patch, { updated_at:new Date().toISOString(), updated_by:me().id }); J.set(K.dash, all); return r; },
+    async reorder(items){ const all = J.get(K.dash, []); items.forEach(it => { const r = all.find(x => x.id === it.id); if(r) r.sort_order = it.sort_order; }); J.set(K.dash, all); },
+    async deleteRow(id){ J.set(K.dash, J.get(K.dash, []).filter(x => x.id !== id)); },
+    async hasRecoveryPin(){ return !!me().pin; },
+    async setRecoveryPin(pin, curPw){ const l = users(); const u = l.find(x => x.id === me().id); if(curPw != null && u.password !== curPw) throw new Error('Password saat ini salah.'); u.pin = pin; u.pin_failed = 0; u.pin_locked_until = 0; saveUsers(l); },
+    async selfReset(username, pin, pw){ await delay(300); if(pw.length < CFG.MIN_PASSWORD) return { ok:false, reason:'weak' };
+      const l = users(); const u = l.find(x => x.username === normUser(username)); if(!u || !u.pin) return { ok:false, reason:'invalid' };
+      if(u.pin_locked_until > Date.now()) return { ok:false, reason:'locked', minutes:Math.ceil((u.pin_locked_until - Date.now())/60000) };
+      if(u.pin_locked_until){ u.pin_locked_until = 0; u.pin_failed = 0; }
+      if(u.pin !== pin){ u.pin_failed = (u.pin_failed||0) + 1; if(u.pin_failed >= 5) u.pin_locked_until = Date.now() + 15*60000; saveUsers(l); return { ok:false, reason:'invalid' }; }
+      u.password = pw; u.pin_failed = 0; u.must_change_password = false; saveUsers(l); await this.forceLogout(u.id); return { ok:true }; },
+    async listUsers(){ const all = J.get(K.sess, {}); return users().map(u => { const s = all[u.id]; return { ...prof(u), has_pin:!!u.pin, pin_locked:u.pin_locked_until > Date.now(), session: s ? { ...s, last_seen:new Date(s.last_seen).toISOString() } : null }; }); },
+    async updateUser(userId, fields){ const l = users(); Object.assign(l.find(u => u.id === userId) || {}, fields); saveUsers(l); },
+    async createUserFull(u){ return this.createUser(u); },
+    async createUser(u){ await delay(80); const l = users(); const un = normUser(u.username); if(l.some(x => x.username === un)) throw new Error('Username sudah dipakai.');
+      const id = uuid(); l.push({ id, username:un, email:toEmail(un), password:u.password, full_name:u.full_name||'', area:u.area||'', position:u.position||'', nik:u.nik||'', role:u.role||'viewer', must_change_password:true, created_at:new Date().toISOString() }); saveUsers(l); return id; },
+    async resetPassword(userId, pw){ const l = users(); const u = l.find(x => x.id === userId); u.password = pw; u.must_change_password = true; delete u.pin; saveUsers(l);
+      const r = J.get(K.resets, []); r.forEach(x => { if(x.user_id === userId && !x.resolved_at) x.resolved_at = new Date().toISOString(); }); J.set(K.resets, r); await this.forceLogout(userId); },
+    async deleteUser(userId){ saveUsers(users().filter(u => u.id !== userId)); const all = J.get(K.sess, {}); delete all[userId]; J.set(K.sess, all); },
+    async requestReset(username){ await delay(300); const u = users().find(x => x.username === normUser(username)); if(!u) return; const r = J.get(K.resets, []); r.push({ id:uuid(), user_id:u.id, username:u.username, requested_at:new Date().toISOString(), resolved_at:null }); J.set(K.resets, r); },
+    async listResetRequests(){ return J.get(K.resets, []).filter(x => !x.resolved_at); },
+    async dismissReset(id){ const r = J.get(K.resets, []); r.forEach(x => { if(x.id === id) x.resolved_at = new Date().toISOString(); }); J.set(K.resets, r); },
+    async changeOwnPassword(oldPw, newPw){ const l = users(); const u = l.find(x => x.id === me().id); if(oldPw != null && u.password !== oldPw) throw new Error('Password lama salah.'); if(u.password === newPw) throw new Error('Password baru harus berbeda dari password lama.'); u.password = newPw; u.must_change_password = false; saveUsers(l); },
+    async forceLogout(userId){ const all = J.get(K.sess, {}); if(all[userId]){ all[userId].session_id = 'revoked'; J.set(K.sess, all); } },
+  };
+}
+
+const api = DEMO ? DemoBackend() : CONFIGURED ? SupabaseBackend() : null;
+
+/* ============================================================
+ *  STATE
+ * ============================================================ */
+const S = { keyP:null, ghToken:null, user:null, profile:null, sid:null, dashboards:[], current:null, view:'home', cache:new Map(), hb:null, unwatch:null, loadToken:0, adminTab:'dash', collapsed:new Set() };
+const isAdmin = () => S.profile && S.profile.role === 'admin';
+
+/* ============================================================
+ *  PENYIMPANAN FILE DASHBOARD
+ *  - "github"  : file dikompres + dienkripsi (AES-256-GCM), disimpan di repo GitHub
+ *                (disajikan GitHub Pages, bandwidth 100 GB/bulan). Kunci hanya
+ *                diberikan Supabase ke pengguna yang sudah login.
+ *  - "supabase": file dikompres, disimpan di Supabase Storage (privat).
+ * ============================================================ */
+const useGH = () => CFG.STORAGE === 'github' && !!CFG.GITHUB_REPO;
+const MAGIC = new Uint8Array([87, 74, 80, 49]); // "WJP1"
+const b64enc = buf => { const a = new Uint8Array(buf); let s = ''; for(let i = 0; i < a.length; i += 0x8000) s += String.fromCharCode.apply(null, a.subarray(i, i + 0x8000)); return btoa(s); };
+const b64dec = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+const blobToB64 = blob => new Promise((res, rej) => { const fr = new FileReader(); fr.onload = () => res(String(fr.result).split(',')[1] || ''); fr.onerror = () => rej(fr.error); fr.readAsDataURL(blob); });
+const importKey = raw => crypto.subtle.importKey('raw', b64dec(raw), 'AES-GCM', false, ['encrypt', 'decrypt']);
+
+async function sealFile(file, key){
+  const gz = await new Response(file.stream().pipeThrough(new CompressionStream('gzip'))).arrayBuffer();
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+  const ct = await crypto.subtle.encrypt({ name:'AES-GCM', iv }, key, gz);
+  return new Blob([MAGIC, iv, ct], { type:'application/octet-stream' });
+}
+async function openSealed(blob, key){
+  const buf = new Uint8Array(await blob.arrayBuffer());
+  if(buf.length < 17 || MAGIC.some((m, i) => buf[i] !== m)) throw new Error('Format file dashboard tidak dikenali.');
+  const pt = await crypto.subtle.decrypt({ name:'AES-GCM', iv:buf.subarray(4, 16) }, key, buf.subarray(16));
+  return await new Response(new Blob([pt]).stream().pipeThrough(new DecompressionStream('gzip'))).blob();
+}
+
+// kunci enkripsi dashboard (diambil sekali per sesi)
+function dashKey(createIfMissing=false){
+  if(!S.keyP) S.keyP = api.getDashKey(createIfMissing).then(importKey).catch(e => { S.keyP = null; throw e; });
+  return S.keyP;
+}
+
+const GH = {
+  async token(){
+    if(S.ghToken) return S.ghToken;
+    const t = await api.getSetting('github_token');
+    if(!t) throw new Error('Token GitHub belum diisi. Buka Panel Admin → Penyimpanan.');
+    return (S.ghToken = t);
+  },
+  async call(path, opts={}){
+    const t = opts.token || await this.token();
+    const r = await fetch(`${CFG.GITHUB_API}/repos/${CFG.GITHUB_REPO}${path}`, { method:opts.method || 'GET', cache:'no-store', body:opts.body ? JSON.stringify(opts.body) : undefined,
+      headers:{ Authorization:'Bearer ' + t, Accept:'application/vnd.github+json', 'X-GitHub-Api-Version':'2022-11-28', ...(opts.body ? { 'Content-Type':'application/json' } : {}) } });
+    if(!r.ok){ const j = await r.json().catch(() => ({})); throw new Error(`GitHub ${r.status}: ${j.message || r.statusText}`); }
+    return r.status === 204 ? null : r.json();
+  },
+  async test(token){
+    const r = await this.call('', { token });
+    const can = r.permissions ? (r.permissions.push || r.permissions.admin) : true;
+    if(!can) throw new Error(`Token bisa membaca ${r.full_name} tetapi tidak punya izin menulis (Contents: Read and write).`);
+    await this.call(`/git/ref/heads/${CFG.GITHUB_BRANCH}`, { token });
+    return r.full_name;
+  },
+  // Satu commit aman: tambah file + hapus file lama.
+  // 1) commit di atas HEAD terbaru, update ref TANPA force → jika HEAD berubah/terbaca usang, GitHub menolak & kita ulangi
+  // 2) lalu (opsional) ringkas riwayat menjadi 1 commit dengan isi yang SAMA persis, agar repo tidak membengkak
+  async commit(adds, removes, message){
+    const blobs = [];
+    for(const a of adds){
+      const b = await this.call('/git/blobs', { method:'POST', body:{ content:await blobToB64(a.blob), encoding:'base64' } });
+      blobs.push({ path:a.path, mode:'100644', type:'blob', sha:b.sha });
+    }
+    let done = null;
+    for(let attempt = 0; attempt < 6 && !done; attempt++){
+      if(attempt) await new Promise(r => setTimeout(r, 700 * attempt));
+      const ref = await this.call(`/git/ref/heads/${CFG.GITHUB_BRANCH}`);
+      const head = await this.call(`/git/commits/${ref.object.sha}`);
+      const tree = [...blobs];
+      if(removes.length){
+        const cur = await this.call(`/git/trees/${head.tree.sha}?recursive=1`);
+        const have = new Set((cur.tree || []).map(x => x.path));
+        removes.filter(p => have.has(p)).forEach(p => tree.push({ path:p, mode:'100644', type:'blob', sha:null }));
+      }
+      if(!tree.length) return;
+      const nt = await this.call('/git/trees', { method:'POST', body:{ base_tree:head.tree.sha, tree } });
+      const c = await this.call('/git/commits', { method:'POST', body:{ message, tree:nt.sha, parents:[ref.object.sha] } });
+      try { await this.call(`/git/refs/heads/${CFG.GITHUB_BRANCH}`, { method:'PATCH', body:{ sha:c.sha, force:false } }); done = { c, tree:nt.sha }; }
+      catch(e){ if(!/ 409| 422/.test(e.message) || attempt === 5) throw e; }
+    }
+    if(!CFG.GITHUB_KEEP_HISTORY){
+      try {
+        const now = await this.call(`/git/ref/heads/${CFG.GITHUB_BRANCH}`);
+        if(now.object.sha === done.c.sha){
+          const o = await this.call('/git/commits', { method:'POST', body:{ message, tree:done.tree, parents:[] } });
+          await this.call(`/git/refs/heads/${CFG.GITHUB_BRANCH}`, { method:'PATCH', body:{ sha:o.sha, force:true } });
+        }
+      } catch(e){ /* ringkas riwayat opsional; isi file sudah aman */ }
+    }
+    return done.c.sha;
+  },
+  async listPaths(){
+    const t = await this.call(`/git/trees/${CFG.GITHUB_BRANCH}?recursive=1`);
+    return new Set((t.tree || []).map(x => x.path));
+  },
+  async fetchFile(path){
+    const base = CFG.GITHUB_PAGES_URL ? CFG.GITHUB_PAGES_URL.replace(/\/?$/, '/') : '';
+    const urls = [base + path, `${CFG.GITHUB_RAW_BASE}/${CFG.GITHUB_REPO}/${CFG.GITHUB_BRANCH}/${path}`];
+    let notFound = 0;
+    for(const u of urls){ try { const r = await fetch(u, { cache:'force-cache' }); if(r.ok) return await r.blob(); if(r.status === 404) notFound++; } catch(e){} }
+    const err = new Error(notFound === urls.length ? 'notfound' : 'network'); err.code = err.message; throw err;
+  },
+};
+
+const Dash = {
+  async storeFile(id, file, oldD, title, onStep){
+    if(useGH()){
+      onStep && onStep('pack');
+      const sealed = await sealFile(file, await dashKey(true));
+      const path = `${CFG.GITHUB_DIR}/${id}-${Date.now()}.bin`;
+      onStep && onStep('upload');
+      await GH.commit([{ path, blob:sealed }], oldD && oldD.storage === 'github' ? [oldD.file_path] : [], `Dashboard: ${title || id}`);
+      if(oldD && oldD.storage !== 'github') api.blobRemove([oldD.file_path]).catch(() => {});
+      return { storage:'github', file_path:path, stored_size:sealed.size };
+    }
+    onStep && onStep('pack');
+    const pk = await packFile(file); const path = `${id}/${Date.now()}-${pk.path}`;
+    onStep && onStep('upload');
+    await api.blobPut(path, pk.blob, pk.gz ? 'application/gzip' : 'text/html; charset=utf-8');
+    if(oldD) (oldD.storage === 'github' ? GH.commit([], [oldD.file_path], 'Hapus file lama') : api.blobRemove([oldD.file_path])).catch(() => {});
+    return { storage:'supabase', file_path:path, stored_size:pk.blob.size };
+  },
+  async create(f, onStep){
+    const id = uuid();
+    const st = await this.storeFile(id, f.file, null, f.title, onStep);
+    onStep && onStep('save');
+    return api.insertRow({ id, title:f.title, category:f.category, icon:f.icon, is_active:f.is_active, sort_order:f.sort_order, file_name:f.file.name, file_size:f.file.size, ...st });
+  },
+  async update(d, fields, file, onStep){
+    const patch = { ...fields };
+    if(file) Object.assign(patch, await this.storeFile(d.id, file, d, fields.title || d.title, onStep), { file_name:file.name, file_size:file.size });
+    onStep && onStep('save');
+    return api.updateRow(d.id, patch);
+  },
+  async remove(d){
+    await api.deleteRow(d.id);
+    if(isLink(d)) return;
+    if(d.storage === 'github') await GH.commit([], [d.file_path], `Hapus dashboard: ${d.title}`).catch(e => toast('Baris dihapus, tetapi file di GitHub gagal dihapus: ' + e.message, 'err', 6000));
+    else await api.blobRemove([d.file_path]).catch(() => {});
+  },
+  loadRaw(d){ return d.storage === 'github' ? GH.fetchFile(d.file_path) : api.blobGet(d.file_path); },
+  async decode(d, raw){
+    if(d.storage !== 'github') return unpack(raw, d.file_path);
+    try { return await openSealed(raw, await dashKey()); }
+    catch(e){ S.keyP = null; return await openSealed(raw, await dashKey()); }   // kunci mungkin baru diganti admin
+  },
+  verKey: d => d.id + '|' + d.updated_at + '|' + d.file_path,
+  async rotateKey(onProgress){
+    const oldKey = await dashKey();
+    const raw = b64enc(crypto.getRandomValues(new Uint8Array(32))); const nk = await importKey(raw);
+    const list = S.dashboards.filter(d => d.storage === 'github');
+    const adds = [], ups = [];
+    for(const [i, d] of list.entries()){
+      onProgress && onProgress(`Mengenkripsi ulang ${i + 1}/${list.length}: ${d.title}`);
+      const html = await openSealed(await GH.fetchFile(d.file_path), oldKey);
+      const sealed = await sealFile(html, nk); const path = `${CFG.GITHUB_DIR}/${d.id}-${Date.now()}-${i}.bin`;
+      adds.push({ path, blob:sealed }); ups.push({ d, path, size:sealed.size });
+    }
+    onProgress && onProgress('Mengunggah ke GitHub…');
+    if(adds.length) await GH.commit(adds, list.map(d => d.file_path), 'Ganti kunci enkripsi dashboard');
+    await api.setDashKey(raw);
+    for(const u of ups) await api.updateRow(u.d.id, { file_path:u.path, stored_size:u.size });
+    S.keyP = Promise.resolve(nk);
+  },
+};
+
+// unduh semua dashboard di latar belakang setelah login → klik dashboard langsung terbuka
+async function prefetchAll(){
+  if(!CFG.PREFETCH) return;
+  const sid = S.sid;
+  for(const d of S.dashboards){
+    if(S.sid !== sid) return;
+    if(!d.is_active || isLink(d)) continue;
+    const ver = Dash.verKey(d);
+    if(await fileCache.get(d.id, ver)) continue;
+    try { const raw = await Dash.loadRaw(d); await fileCache.put(d.id, ver, raw, d.file_path); api.logOpen(d, raw.size, false, 'prefetch'); } catch(e){}
+  }
+}
+
+try { const ui = JSON.parse(localStorage.getItem(UI_KEY) || '{}'); S.pinned = ui.pinned === true; (ui.groups||[]).forEach(g => S.collapsed.add(g)); } catch(e){}
+const saveUI = () => localStorage.setItem(UI_KEY, JSON.stringify({ pinned:!!S.pinned, groups:[...S.collapsed] }));
+function applyRail(){
+  document.body.classList.toggle('rail', S.view === 'dash' && !S.pinned);
+  const b = $('#btnCollapse'); b.title = S.pinned ? 'Kecilkan menu otomatis saat dashboard dibuka' : 'Sematkan menu (selalu lebar)';
+  b.classList.toggle('btn-primary', !!S.pinned && S.view === 'dash');
+}
+$('#sidebar').addEventListener('mouseleave', () => $('#sidebar').classList.remove('closing'));
+
+/* ============================================================
+ *  LOGIN / SESSION GUARD
+ * ============================================================ */
+function showLogin(msg, kind='err'){
+  document.querySelectorAll('.modal-back').forEach(m => m.remove());
+  $('#app').classList.add('hidden'); $('#login').classList.remove('hidden');
+  $('#loginForm').classList.remove('hidden'); $('#forgotForm').classList.add('hidden');
+  $('#loginAlert').innerHTML = msg ? `<div class="alert alert-${kind}">${esc(msg)}</div>` : '';
+  $('#lgBtn').disabled = false; $('#lgBtn').textContent = 'Masuk';
+  setTimeout(() => $('#lgUser').focus(), 50);
+}
+
+$('#lnkForgot').onclick = () => { $('#loginForm').classList.add('hidden'); $('#forgotForm').classList.remove('hidden'); $('#forgotAlert').innerHTML = ''; $('#fgUser').value = $('#lgUser').value; ($('#fgUser').value ? $('#fgPin') : $('#fgUser')).focus(); };
+$('#lnkBack').onclick = () => { $('#forgotForm').classList.add('hidden'); $('#loginForm').classList.remove('hidden'); };
+const fgShow = (t, k='err') => $('#forgotAlert').innerHTML = `<div class="alert alert-${k}">${esc(t)}</div>`;
+$('#fgPin').addEventListener('input', e => { e.target.value = e.target.value.replace(/\D/g, '').slice(0, 6); });
+$('#forgotForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const u = $('#fgUser').value.trim(), pin = $('#fgPin').value.trim(), p1 = $('#fgPw1').value, p2 = $('#fgPw2').value;
+  if(!u) return fgShow('Isi username.');
+  if(!/^\d{6}$/.test(pin)) return fgShow('PIN harus 6 digit angka.');
+  if(p1.length < CFG.MIN_PASSWORD) return fgShow(`Password baru minimal ${CFG.MIN_PASSWORD} karakter.`);
+  if(p1 !== p2) return fgShow('Ulangi password tidak sama.');
+  const b = $('#fgBtn'); b.disabled = true; b.textContent = 'Memproses…';
+  try {
+    const r = await api.selfReset(u, pin, p1);
+    if(r && r.ok){
+      ['#fgPin','#fgPw1','#fgPw2'].forEach(x => $(x).value = '');
+      showLogin('Password berhasil direset. Silakan masuk dengan password baru.', 'info');
+      $('#lgUser').value = u; setTimeout(() => $('#lgPass').focus(), 80);
+    } else if(r && r.reason === 'locked') fgShow(`Terlalu banyak percobaan PIN salah. Coba lagi dalam ${r.minutes || 15} menit, atau minta reset ke Admin.`);
+    else if(r && r.reason === 'weak') fgShow(`Password baru minimal ${CFG.MIN_PASSWORD} karakter.`);
+    else { fgShow('Username atau PIN salah. Setelah 5 kali salah, reset dikunci 15 menit.'); $('#fgPin').value = ''; $('#fgPin').focus(); }
+  } catch(err){ fgShow(err.message || 'Gagal mereset password.'); }
+  b.disabled = false; b.textContent = 'Reset password';
+});
+$('#lnkAskAdmin').onclick = async () => {
+  const u = $('#fgUser').value.trim();
+  if(!u){ fgShow('Isi username dulu, lalu klik "Minta reset ke Admin".', 'warn'); $('#fgUser').focus(); return; }
+  try { await api.requestReset(u); fgShow('Permintaan terkirim ke Admin. Admin akan memberikan password sementara; saat login nanti Anda diminta membuat password dan PIN baru.', 'info'); }
+  catch(err){ fgShow(err.message || 'Gagal mengirim permintaan.'); }
+};
+$('#pwToggle').onclick = () => { const i = $('#lgPass'); i.type = i.type === 'password' ? 'text' : 'password'; };
+
+$('#loginForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const id = $('#lgUser').value.trim(), pw = $('#lgPass').value;
+  if(!id || !pw) return;
+  $('#lgBtn').disabled = true; $('#lgBtn').textContent = 'Memeriksa…'; $('#loginAlert').innerHTML = '';
+  try {
+    const user = await api.signIn(id, pw);
+    const sid = uuid();
+    const [auth, r] = await Promise.all([api.profile(user), api.claimSession(sid, navigator.userAgent)]);
+    if(!r || r.ok === false){
+      await api.signOut('local');
+      return showLogin(`Akun ini sedang aktif di perangkat lain. Logout dulu dari perangkat tersebut, atau tunggu ±${Math.ceil(CFG.BLOCK_STALE_SECONDS/60)} menit setelah perangkat itu ditutup, atau minta Admin melakukan "Paksa Logout".`, 'warn');
+    }
+    SID_STORE.setItem(SID_KEY, sid);
+    if(CFG.SESSION_MODE === 'kick') api.revokeOthers();
+    $('#lgPass').value = '';
+    await enterApp(auth, sid);
+  } catch(err){
+    console.error(err);
+    showLogin(err.message || 'Gagal masuk. Coba lagi.');
+  }
+});
+
+async function boot(){
+  document.title = CFG.PORTAL_TITLE;
+  $('#sideTitle').innerHTML = esc(CFG.PORTAL_TITLE).replace(/\s+(West Java)/i, '<br>$1'); $('#sideSub').textContent = CFG.PORTAL_SUBTITLE;
+  try {
+    const sid = SID_STORE.getItem(SID_KEY);
+    const [auth, alive] = await Promise.all([api.restore(), sid ? api.heartbeat(sid).catch(() => false) : false]);
+    if(auth && sid && alive) return enterApp(auth, sid);
+    if(auth){ await api.signOut('local'); SID_STORE.removeItem(SID_KEY); return showLogin(sid ? 'Sesi Anda sudah berakhir karena akun ini login di perangkat lain atau dikeluarkan oleh Admin.' : '', 'warn'); }
+  } catch(e){ console.error(e); }
+  showLogin();
+}
+
+function startGuard(){
+  stopGuard();
+  S.hb = setInterval(checkSession, CFG.HEARTBEAT_SECONDS * 1000);
+  S.unwatch = api.watchSession(S.user.id, sidNow => { if(sidNow && sidNow !== S.sid) kicked(sidNow); });
+  document.addEventListener('visibilitychange', onVisible);
+}
+function stopGuard(){ clearInterval(S.hb); S.hb = null; if(S.unwatch){ S.unwatch(); S.unwatch = null; } document.removeEventListener('visibilitychange', onVisible); }
+function onVisible(){ if(document.visibilityState === 'visible') checkSession(); }
+async function checkSession(){ if(!S.sid) return; try { if(!(await api.heartbeat(S.sid))) kicked(); } catch(e){ /* jaringan putus: coba lagi di interval berikutnya */ } }
+
+async function kicked(sidNow){
+  if(!S.sid) return;
+  // Tab lain di browser yang sama baru saja login ulang → ikut pakai sesi itu, bukan dikeluarkan
+  const shared = SID_STORE.getItem(SID_KEY);
+  if(shared && shared !== S.sid && await api.heartbeat(shared).catch(() => false)){ S.sid = shared; return; }
+  S.sid = null; S.keyP = null; S.ghToken = null; stopGuard(); SID_STORE.removeItem(SID_KEY);
+  await api.signOut('local'); clearFrame(); S.cache.forEach(u => URL.revokeObjectURL(u)); S.cache.clear();
+  const msg = sidNow === 'revoked' ? 'Anda telah dikeluarkan oleh Admin. Silakan login kembali.'
+            : sidNow === 'released' ? 'Anda sudah logout dari tab/jendela lain.'
+            : 'Sesi Anda berakhir karena akun ini baru saja login di perangkat lain. Satu akun hanya boleh aktif di satu perangkat.';
+  showLogin(msg, 'warn');
+}
+
+async function logout(){
+  const sid = S.sid; S.sid = null; S.keyP = null; S.ghToken = null; stopGuard(); SID_STORE.removeItem(SID_KEY);
+  if(sid) await api.releaseSession(sid);
+  await api.signOut('local'); clearFrame(); S.cache.forEach(u => URL.revokeObjectURL(u)); S.cache.clear();
+  history.replaceState(null, '', location.pathname);
+  showLogin('Anda sudah keluar.', 'info');
+}
+
+/* ============================================================
+ *  APP
+ * ============================================================ */
+async function enterApp(auth, sid){
+  S.user = auth.user; S.profile = auth.profile; S.sid = sid;
+  $('#login').classList.add('hidden'); $('#app').classList.remove('hidden');
+  const name = S.profile.full_name || S.profile.username || S.user.email;
+  $('#uName').textContent = name; $('#uAvatar').textContent = (name||'?').trim().charAt(0).toUpperCase();
+  $('#uRole').textContent = S.profile.role; $('#uRole').className = 'role-badge role-' + S.profile.role;
+  $('#uPosTxt').textContent = [S.profile.position, S.profile.area].filter(Boolean).join(' · ');
+  $('#btnAdmin').classList.toggle('hidden', !isAdmin());
+  startGuard();
+  $('#nav').innerHTML = '<div class="nav-empty">Memuat…</div>';
+  const [, pin] = await Promise.all([refreshDashboards(), api.hasRecoveryPin().catch(() => true)]);
+  S.hasPin = pin;
+  route();
+  if(S.dashboards.some(d => d.storage === 'github')) dashKey().catch(() => {});
+  setTimeout(prefetchAll, 1200);
+  if(S.profile.must_change_password) pwModal(true);
+  else if(!S.hasPin) pinModal(true);
+}
+
+async function refreshDashboards(){
+  try { S.dashboards = await api.listDashboards(); fileCache.prune(S.dashboards.map(d => d.id)); }
+  catch(e){ console.error(e); toast('Gagal memuat daftar dashboard: ' + e.message, 'err'); S.dashboards = []; }
+  renderNav();
+}
+
+function renderNav(){
+  const q = $('#navSearch').value.trim().toLowerCase();
+  const list = S.dashboards.filter(d => !q || d.title.toLowerCase().includes(q));
+  const nav = $('#nav');
+  if(!S.dashboards.length){ nav.innerHTML = `<div class="nav-empty">Belum ada dashboard.${isAdmin() ? '<br>Tambahkan lewat <b>Panel Admin</b>.' : ''}</div>`; return; }
+  if(!list.length){ nav.innerHTML = `<div class="nav-empty">Tidak ada yang cocok dengan "${esc(q)}".</div>`; return; }
+  const item = d => `
+    <a class="nav-item ${S.current && S.current.id === d.id && S.view === 'dash' ? 'active' : ''} ${d.is_active ? '' : 'inactive'}" ${itemHref(d)} ${itemAttrs(d)} title="${esc(d.title)}${noteOf(d) ? ' — ' + esc(noteOf(d)) : ''}${linkNewTab(d) ? ' (buka di tab baru)' : d.storage === 'link-same' ? ' (pindah ke halaman ini)' : ''}">
+      <span class="nav-ic">${esc(d.icon || (isLink(d) ? '🔗' : '📊'))}</span><span class="nav-label">${esc(d.title)}${noteOf(d) ? `<small class="nav-note">${esc(noteOf(d))}</small>` : ''}</span>${linkDirect(d) ? LINK_IC : ''}</a>`;
+  const main = list.filter(d => !isOther(d)), oth = list.filter(isOther);
+  const open = !!(q && oth.length);
+  const othAct = S.current && isOther(S.current) && S.view === 'dash';
+  nav.innerHTML = `<div class="nav-group"><div class="nav-items">${main.map(item).join('')}</div>
+    ${oth.length ? `<div class="nav-others ${open ? 'open' : ''}">
+      <button class="nav-others-btn ${othAct ? 'act' : ''}" id="othersBtn" title="${esc(OTH_LABEL)}"><span class="nav-ic">${esc(OTH_ICON)}</span><span class="lbl">${esc(OTH_LABEL)}</span><span class="cnt">${oth.length}</span>
+        <svg class="chev" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></button>
+      <div class="nav-items">${oth.map(item).join('')}</div></div>` : ''}</div>`;
+  const ob = $('#othersBtn'); if(ob) ob.onclick = e => { e.stopPropagation(); if(open) return; othersPop(ob, 'right'); };
+  requestAnimationFrame(fitNav);
+}
+$('#navSearch').addEventListener('input', renderNav);
+const navEnd = () => { const n = $('#nav'); n.classList.toggle('at-end', n.scrollTop + n.clientHeight >= n.scrollHeight - 4); };
+function fitNav(){   // padatkan menu otomatis supaya semua dashboard terlihat tanpa scroll
+  const sb = $('#sidebar'), n = $('#nav'); if(!n) return;
+  sb.classList.remove('dense', 'xdense');
+  if(n.scrollHeight > n.clientHeight + 2){ sb.classList.add('dense'); if(n.scrollHeight > n.clientHeight + 2) sb.classList.add('xdense'); }
+  navEnd();
+}
+window.addEventListener('resize', () => requestAnimationFrame(fitNav));
+$('#nav').addEventListener('scroll', navEnd); window.addEventListener('resize', navEnd);
+$('#nav').addEventListener('click', e => { if(e.target.closest('.nav-item')){ document.body.classList.remove('side-open'); if(!S.pinned) $('#sidebar').classList.add('closing'); } });
+
+function setView(v){
+  S.view = v; applyRail();
+  $('#frame').classList.toggle('hidden', v !== 'dash');
+  $('#home').classList.toggle('hidden', v !== 'home');
+  $('#admin').classList.toggle('hidden', v !== 'admin');
+  $('#dashActions').classList.toggle('hidden', v !== 'dash');
+  if(v !== 'dash') $('#loading').classList.add('hidden');
+  $('#btnHome').classList.toggle('active', v === 'home');
+  $('#btnAdmin').classList.toggle('active', v === 'admin');
+  renderNav();
+}
+
+function route(){
+  if(!S.sid) return;
+  const h = location.hash;
+  let m;
+  if((m = h.match(/^#d-([\w-]+)/))){ const d = S.dashboards.find(x => x.id === m[1]); if(d) return openDashboard(d); toast('Dashboard tidak ditemukan.', 'err'); }
+  if(h.startsWith('#admin') && isAdmin()) return openAdmin();
+  openHome();
+}
+window.addEventListener('hashchange', route);
+
+const tileHtml = d => `
+<a class="tile" ${itemHref(d)} ${itemAttrs(d)} style="text-decoration:none;color:inherit">
+          <span class="nav-ic">${esc(d.icon || (isLink(d) ? '🔗' : '📊'))}</span>
+          <div><div class="tt">${esc(d.title)}</div>${noteOf(d) ? `<div class="tile-note">ℹ️ ${esc(noteOf(d))}</div>` : ''}<div class="tm">${isLink(d) ? `Link · ${esc(hostOf(d.file_path))}${linkDirect(d) ? ' ↗' : ''}` : `Diperbarui ${fmtDate(d.updated_at)} · ${fmtSize(d.file_size)}`}</div>${d.is_active ? '' : '<span class="pill pill-off" style="margin-top:8px">Nonaktif</span>'}</div>
+        </a>`;
+function closeOthersPop(){ const p = document.getElementById('othPop'); if(p){ if(p._off) p._off(); p.remove(); } document.removeEventListener('mousedown', othOutside, true); document.removeEventListener('keydown', othEsc, true); }
+function othOutside(e){ const p = document.getElementById('othPop'); if(p && !p.contains(e.target) && !e.target.closest('#othersBtn,#homeOthersBtn')) closeOthersPop(); }
+function othEsc(e){ if(e.key === 'Escape') closeOthersPop(); }
+function othersPop(anchor, side){
+  if(document.getElementById('othPop')){ closeOthersPop(); return; }
+  const items = S.dashboards.filter(isOther);
+  const p = document.createElement('div'); p.id = 'othPop'; p.className = 'oth-pop';
+  p.innerHTML = `<div class="oth-pop-h"><span>${esc(OTH_ICON)} ${esc(OTH_LABEL)}</span><button type="button" class="oth-pop-x" title="Tutup">✕</button></div>
+    <div class="oth-pop-b">${items.map(d => `
+      <a class="oth-pop-i ${d.is_active ? '' : 'inactive'}" ${itemHref(d)} ${itemAttrs(d)}>
+        <span class="nav-ic">${esc(d.icon || (isLink(d) ? '🔗' : '📊'))}</span>
+        <span class="oth-pop-t">${esc(d.title)}${d.is_active ? '' : ' <small style="color:#dc2626">· nonaktif</small>'}${noteOf(d) ? `<small>ℹ️ ${esc(noteOf(d))}</small>` : ''}</span>${linkDirect(d) ? LINK_IC : ''}</a>`).join('') || '<div class="t-sub" style="padding:10px">Kosong.</div>'}</div>`;
+  document.body.appendChild(p);
+  const place = () => {
+    if(!p.isConnected || !anchor.isConnected) return;
+    const r = anchor.getBoundingClientRect(), W = innerWidth, H = innerHeight, pw = p.offsetWidth, ph = p.offsetHeight;
+    let left, top;
+    if(side === 'right' && r.right + 8 + pw <= W){ left = r.right + 8; top = Math.min(r.top, H - ph - 10); }
+    else { left = Math.min(r.left, W - pw - 10); top = r.bottom + 6; if(top + ph > H - 10) top = Math.max(10, r.top - ph - 6); }
+    p.style.left = Math.max(10, left) + 'px'; p.style.top = Math.max(10, top) + 'px';
+  };
+  place(); setTimeout(place, 260);
+  if(side === 'right'){ const sb = $('#sidebar'); const re = () => setTimeout(place, 260); sb.addEventListener('mouseleave', re); sb.addEventListener('mouseenter', re); p._off = () => { sb.removeEventListener('mouseleave', re); sb.removeEventListener('mouseenter', re); }; }
+  p.querySelector('.oth-pop-x').onclick = closeOthersPop;
+  p.addEventListener('click', e => { if(e.target.closest('.oth-pop-i')) setTimeout(closeOthersPop, 0); });
+  setTimeout(() => { document.addEventListener('mousedown', othOutside, true); document.addEventListener('keydown', othEsc, true); });
+}
+function openHome(){
+  S.current = null; setView('home');
+  $('#topH').textContent = 'Beranda'; $('#topM').textContent = `${S.dashboards.length} dashboard tersedia`;
+  const name = S.profile.full_name || S.profile.username;
+  const hb = $('#home'); hb.classList.toggle('has-bg', !!CFG.HOME_BG); if(CFG.HOME_BG) hb.style.setProperty('--home-bg', `url("${String(CFG.HOME_BG).replace(/"/g, '%22')}")`);
+  setTimeout(() => { const hb2 = $('#homeOthersBtn'); if(hb2) hb2.onclick = e => { e.stopPropagation(); othersPop(hb2, 'below'); }; });
+  $('#home').innerHTML = `
+    <h2>Selamat datang, ${esc(name)} 👋</h2>
+    <p class="lead">Pilih dashboard dari menu di kiri atau dari daftar di bawah.</p>
+    ${S.dashboards.length ? `
+      <div class="grid">${S.dashboards.filter(d => !isOther(d)).map(tileHtml).join('')}</div>
+      ${S.dashboards.some(isOther) ? `<div class="home-others"><button id="homeOthersBtn">${esc(OTH_ICON)} ${esc(OTH_LABEL)} <span class="t-sub">(${S.dashboards.filter(isOther).length})</span> <span>▸</span></button></div>` : ''}`
+    : `<div class="card empty-state">Belum ada dashboard yang dipublikasikan.${isAdmin() ? ' <a href="#admin">Buka Panel Admin</a> untuk menambahkan.' : ''}</div>`}
+    ${contactsHtml('')}`;
+}
+
+function clearFrame(){ const f = $('#frame'); f.removeAttribute('src'); f.src = 'about:blank'; }
+
+async function openDashboard(d, force=false){
+  if(linkNewTab(d)){ window.open(d.file_path, '_blank', 'noopener'); api.logOpen(d, 0, true); if(!S.current) openHome(); return; }
+  if(d.storage === 'link-same'){ await Promise.race([api.logOpen(d, 0, true), new Promise(r => setTimeout(r, 700))]); location.href = d.file_path; return; }
+  S.current = d; setView('dash');
+  if(isLink(d)){
+    $('#topH').textContent = d.title; $('#topM').textContent = 'Link · ' + d.file_path;
+    ++S.loadToken; api.logOpen(d, 0, true);
+    setLoad('load', 'Membuka link…', hostOf(d.file_path));
+    const fr = $('#frame'); fr.onload = () => setLoad('hide');
+    fr.src = d.file_path;
+    return;
+  }
+  $('#topH').textContent = d.title;
+  $('#topM').textContent = `Diperbarui ${fmtDate(d.updated_at)} · ${fmtSize(d.file_size)}`;
+  const key = Dash.verKey(d);
+  const token = ++S.loadToken;
+  const frame = $('#frame');
+  let url = !force && S.cache.get(key);
+  if(url) api.logOpen(d, 0, true);
+  if(!url){
+    setLoad('load', 'Memuat dashboard…', `${d.title} · ${fmtSize(d.file_size)}`);
+    try {
+      let raw = await fileCache.get(d.id, key), fromCache = !!raw;
+      if(raw) raw = raw.blob;
+      else {
+        for(let attempt = 0; ; attempt++){
+          try { setLoad('load', attempt ? 'Menyiapkan dashboard…' : 'Mengunduh dashboard…', attempt ? `Dashboard ini baru saja diperbarui dan sedang diterbitkan GitHub (biasanya ±1–2 menit). Mencoba lagi otomatis… (${attempt})` : `${d.title} · ${fmtSize(d.file_size)}`);
+                raw = await Dash.loadRaw(d); break; }
+          catch(e){
+            const recent = Date.now() - new Date(d.updated_at).getTime() < 10 * 60 * 1000;
+            if(token !== S.loadToken) return;
+            if(e.code === 'notfound' && recent && attempt < 24){ await new Promise(r => setTimeout(r, 8000)); if(token !== S.loadToken) return; continue; }
+            throw e;
+          }
+        }
+        fileCache.put(d.id, key, raw, d.file_path);
+      }
+      api.logOpen(d, fromCache ? 0 : raw.size, fromCache);
+      const blob = await Dash.decode(d, raw);
+      if(token !== S.loadToken) return;
+      url = URL.createObjectURL(new Blob([blob], { type:'text/html;charset=utf-8' }));
+      const oldKey = [...S.cache.keys()].find(k => k.startsWith(d.id + '|'));
+      if(oldKey){ URL.revokeObjectURL(S.cache.get(oldKey)); S.cache.delete(oldKey); }
+      S.cache.set(key, url);
+    } catch(e){
+      if(token !== S.loadToken) return;
+      console.error(e);
+      const msg = e.code === 'notfound' ? (isAdmin() ? 'File dashboard ini tidak ditemukan di GitHub. Buka Panel Admin → Dashboard, lalu klik "Ganti file" pada dashboard ini dan pilih file HTML-nya lagi.' : 'File dashboard ini sedang tidak tersedia. Silakan coba lagi nanti atau hubungi Admin Region.')
+                : e.code === 'network' ? 'Koneksi bermasalah saat mengunduh dashboard. Periksa internet Anda lalu klik Coba lagi.'
+                : (e.message || String(e));
+      setLoad('error', 'Dashboard belum bisa dibuka', msg, true);
+      return;
+    }
+  }
+  setLoad('load', 'Menampilkan dashboard…', d.title);
+  frame.onload = () => { if(token === S.loadToken) setLoad('hide'); };
+  frame.src = url;
+}
+
+function setLoad(mode, title='', sub='', retry=false){
+  const L = $('#loading');
+  if(mode === 'hide'){ L.classList.add('hidden'); return; }
+  L.classList.remove('hidden');
+  L.querySelector('.spinner').style.display = mode === 'error' ? 'none' : '';
+  $('#loadErrIc').classList.toggle('hidden', mode !== 'error');
+  $('#loadingT').textContent = title; $('#loadingS').textContent = sub;
+  $('#loadRetry').classList.toggle('hidden', !retry);
+}
+$('#loadRetry').onclick = () => { if(S.current) openDashboard(S.current, true); };
+
+$('#btnReload').onclick = async () => {
+  if(!S.current) return;
+  await refreshDashboards();
+  const d = S.dashboards.find(x => x.id === S.current.id);
+  if(d) openDashboard(d, true); else openHome();
+};
+$('#btnNewTab').onclick = () => { if(S.current && isLink(S.current)) return window.open(S.current.file_path, '_blank', 'noopener'); const k = [...S.cache.keys()].find(k => S.current && k.startsWith(S.current.id + '|')); if(k) window.open(S.cache.get(k), '_blank'); };
+$('#btnFull').onclick = () => { const f = $('#content'); (f.requestFullscreen || f.webkitRequestFullscreen).call(f); };
+$('#btnHome').onclick = () => { location.hash = '#home'; document.body.classList.remove('side-open'); };
+$('#btnAdmin').onclick = () => { location.hash = '#admin'; document.body.classList.remove('side-open'); };
+$('#btnPin').onclick = () => { document.body.classList.remove('side-open'); pinModal(false); };
+$('#btnPw').onclick = () => { document.body.classList.remove('side-open'); pwModal(false); };
+$('#btnLogout').onclick = async () => { if(await askConfirm('Keluar dari portal?', 'Keluar')) logout(); };
+(() => { let n = 0, t = 0; $('#sideLogo').addEventListener('click', () => { const now = Date.now(); n = now - t < 600 ? n + 1 : 1; t = now; if(n >= 5){ n = 0; toast('✨ Portal created by Indri Savitri', 'ok', 3000); } }); })();
+$('#btnCollapse').onclick = () => { S.pinned = !S.pinned; saveUI(); applyRail(); };
+$('#btnMenu').onclick = () => document.body.classList.toggle('side-open');
+$('#scrim').onclick = () => document.body.classList.remove('side-open');
+
+/* ============================================================
+ *  ADMIN
+ * ============================================================ */
+function openAdmin(){
+  if(!isAdmin()) return openHome();
+  S.current = null; setView('admin');
+  $('#topH').textContent = 'Panel Admin'; $('#topM').textContent = 'Kelola dashboard, pengguna, dan sesi';
+  renderAdmin();
+}
+
+function renderAdmin(){
+  const el = $('#admin');
+  el.innerHTML = `
+    <div class="admin-head">
+      <div><h2>Panel Admin</h2><p>Tambah, perbarui, dan atur dashboard yang tampil di portal.</p></div>
+      <div id="adminActs" style="display:flex;gap:8px;flex-wrap:wrap"></div>
+    </div>
+    <div class="tabs">
+      <button class="tab ${S.adminTab==='dash'?'active':''}" data-t="dash">Dashboard</button>
+      <button class="tab ${S.adminTab==='users'?'active':''}" data-t="users">Pengguna & Sesi</button>
+      <button class="tab ${S.adminTab==='report'?'active':''}" data-t="report">Laporan</button>
+      <button class="tab ${S.adminTab==='store'?'active':''}" data-t="store">Penyimpanan</button>
+    </div>
+    <div id="adminBody"></div>`;
+  el.querySelectorAll('.tab').forEach(b => b.onclick = () => { S.adminTab = b.dataset.t; renderAdmin(); });
+  S.adminTab === 'dash' ? renderAdminDash() : S.adminTab === 'users' ? renderAdminUsers() : S.adminTab === 'report' ? renderAdminReport() : renderAdminStore();
+}
+
+function renderAdminDash(){
+  $('#adminActs').innerHTML = `
+    <label class="btn" title="Pilih beberapa file HTML sekaligus; judul diambil dari &lt;title&gt; tiap file">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v4h16v-4"/></svg>Unggah banyak
+      <input type="file" id="bulkInput" accept=".html,.htm,text/html" multiple hidden></label>
+    <button class="btn" id="btnAddLink"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>Tambah link</button>
+    <button class="btn btn-primary" id="btnAdd"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Tambah dashboard</button>`;
+  $('#btnAdd').onclick = () => dashModal(null);
+  $('#btnAddLink').onclick = () => linkModal(null);
+  $('#bulkInput').onchange = e => bulkUpload([...e.target.files]);
+  const list = S.dashboards;
+  $('#adminBody').innerHTML = `<div id="usageCard"></div>` + (list.length ? `
+    <div class="card"><table class="tbl">
+      <thead><tr><th style="width:44px">Urut</th><th>Dashboard</th><th class="hide-sm">File</th><th class="hide-sm">Diperbarui</th><th>Status</th><th style="text-align:right">Aksi</th></tr></thead>
+      <tbody>${list.map((d, i) => `
+        <tr data-id="${d.id}">
+          <td><div class="order-btns"><button data-mv="-1" ${i===0?'disabled':''} title="Naik">▲</button><button data-mv="1" ${i===list.length-1?'disabled':''} title="Turun">▼</button></div></td>
+          <td><div class="t-title"><span class="nav-ic" style="background:#eff6ff">${esc(d.icon||'📊')}</span><div>${esc(d.title)}${isOther(d) ? '<span class="tag tag-oth">Others</span>' : ''}</div></div></td>
+          <td class="hide-sm">${isLink(d) ? `<div style="max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${esc(d.file_path)}">🔗 ${esc(hostOf(d.file_path))}</div><div class="t-sub">Link · ${linkNewTab(d) ? 'buka di tab baru' : d.storage === 'link-same' ? 'pindah di tab yang sama' : 'tampil di dalam portal'}</div>${noteOf(d) ? `<div class="t-sub" style="color:#b45309">ℹ️ ${esc(noteOf(d))}</div>` : ''}</td>` : `<div style="max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${esc(d.file_name)}">${esc(d.file_name||'—')}</div><div class="t-sub">${fmtSize(d.file_size)}${d.stored_size && d.stored_size < d.file_size ? ` → <b style="color:var(--ok)">${fmtSize(d.stored_size)}</b> terkompres` : ''}</div></td>`}
+          <td class="hide-sm">${fmtDate(d.updated_at)}</td>
+          <td class="st">${d.is_active ? '<span class="pill pill-ok">Aktif</span>' : '<span class="pill pill-off">Nonaktif</span>'}</td>
+          <td><div class="acts">
+            <a class="btn btn-sm" ${itemHref(d)} ${itemAttrs(d)}>${linkDirect(d) ? 'Buka ↗' : 'Lihat'}</a>
+            ${isLink(d) ? '' : '<button class="btn btn-sm btn-primary" data-act="replace">Ganti file</button>'}
+            <button class="btn btn-sm" data-act="edit">Edit</button>
+            <button class="btn btn-sm btn-danger" data-act="del">Hapus</button>
+          </div></td>
+        </tr>`).join('')}
+      </tbody></table></div>
+    <p class="help">💡 Saat data berubah, klik <b>Ganti file</b> lalu pilih file HTML terbaru — semua pengguna otomatis melihat versi baru saat membuka / memuat ulang dashboard. Dashboard <b>Nonaktif</b> hanya terlihat oleh admin.</p>`
+  : `<div class="card empty-state">Belum ada dashboard. Klik <b>Tambah dashboard</b> atau <b>Unggah banyak</b> untuk memasukkan file HTML.</div>`);
+  renderUsage();
+  checkGhFiles();
+  $('#adminBody').querySelectorAll('tr[data-id]').forEach(tr => {
+    const d = S.dashboards.find(x => x.id === tr.dataset.id);
+    tr.querySelectorAll('[data-mv]').forEach(b => b.onclick = () => move(d, +b.dataset.mv));
+    const rp = tr.querySelector('[data-act=replace]'); if(rp) rp.onclick = () => dashModal(d, true);
+    tr.querySelector('[data-act=edit]').onclick = () => isLink(d) ? linkModal(d) : dashModal(d);
+    tr.querySelector('[data-act=del]').onclick = async () => {
+      if(!(await askConfirm(isLink(d) ? `Hapus link "${d.title}" dari menu?` : `Hapus dashboard "${d.title}"? File HTML-nya juga akan dihapus dari penyimpanan.`, 'Hapus', true))) return;
+      try { await Dash.remove(d); toast('Dashboard dihapus.', 'ok'); await refreshDashboards(); renderAdminDash(); } catch(e){ toast('Gagal menghapus: ' + e.message, 'err'); }
+    };
+  });
+}
+
+async function renderAdminStore(){
+  $('#adminActs').innerHTML = '';
+  const body = $('#adminBody');
+  if(!useGH()){
+    body.innerHTML = `<div class="card" style="padding:18px"><b>Mode: Supabase Storage</b><p class="t-sub" style="margin:6px 0 0;line-height:1.6">File dashboard disimpan (terkompres) di Supabase Storage. Untuk memakai GitHub (kuota jauh lebih besar), isi <code>STORAGE: "github"</code> dan <code>GITHUB_REPO</code> di <code>config.js</code>.</p></div>`;
+    return;
+  }
+  let has = false; try { has = !!(await api.getSetting('github_token')); } catch(e){}
+  const nGH = S.dashboards.filter(d => d.storage === 'github').length, nOld = S.dashboards.length - nGH;
+  body.innerHTML = `
+    <div class="card" style="padding:18px;margin-bottom:16px">
+      <div style="font-weight:700;margin-bottom:4px">Mode: GitHub (terenkripsi)</div>
+      <div class="t-sub" style="line-height:1.7">Repo <span class="mono">${esc(CFG.GITHUB_REPO)}</span> · branch <span class="mono">${esc(CFG.GITHUB_BRANCH)}</span> · folder <span class="mono">${esc(CFG.GITHUB_DIR)}/</span><br>
+        File dikompres lalu dienkripsi AES-256 sebelum dikirim ke GitHub. Orang yang membuka repo hanya melihat file acak; kunci pembukanya hanya diberikan kepada pengguna yang login.<br>
+        ${nGH} dashboard di GitHub${nOld ? ` · ${nOld} dashboard masih di Supabase (klik <b>Ganti file</b> untuk memindahkannya)` : ''}.</div>
+    </div>
+    <div class="card" style="padding:18px;margin-bottom:16px">
+      <div style="font-weight:700;margin-bottom:8px">Token GitHub ${has ? '<span class="pill pill-ok" style="margin-left:6px">Tersimpan</span>' : '<span class="pill pill-warn" style="margin-left:6px">Belum diisi</span>'}</div>
+      <form id="tokForm" style="display:flex;gap:8px;flex-wrap:wrap" autocomplete="off">
+        <input class="input" type="password" name="t" placeholder="github_pat_…" style="flex:1;min-width:260px" autocomplete="off">
+        <button class="btn btn-primary" type="submit">Tes & simpan</button>
+      </form>
+      <div id="tokMsg"></div>
+      <p class="help" style="margin-bottom:0">Buat di GitHub → Settings → Developer settings → <b>Fine-grained tokens</b> → Generate new token: <i>Repository access</i> = hanya repo ini, <i>Permissions → Contents</i> = <b>Read and write</b>. Token disimpan di Supabase dan hanya bisa dibaca admin.</p>
+    </div>
+    <div class="card" style="padding:18px">
+      <div style="font-weight:700;margin-bottom:6px">Kunci enkripsi</div>
+      <p class="t-sub" style="margin:0 0 12px;line-height:1.6">Ganti kunci jika ada pengguna yang dihapus/keluar dan Anda ingin memastikan ia tidak bisa membuka file versi berikutnya. Semua dashboard dienkripsi ulang otomatis.</p>
+      <button class="btn btn-danger" id="btnRotate" ${nGH ? '' : 'disabled'}>Ganti kunci enkripsi</button> <span class="t-sub" id="rotMsg"></span>
+    </div>`;
+  $('#tokForm').onsubmit = async e => {
+    e.preventDefault(); const t = e.target.t.value.trim(); const msg = $('#tokMsg'); if(!t) return;
+    msg.innerHTML = '<p class="t-sub">Mengetes token…</p>';
+    try { const name = await GH.test(t); await api.setSetting('github_token', t); S.ghToken = t; toast('Token GitHub tersimpan.', 'ok'); renderAdminStore(); }
+    catch(ex){ msg.innerHTML = `<div class="alert alert-err" style="margin:12px 0 0">${esc(ex.message)}</div>`; }
+  };
+  $('#btnRotate').onclick = async () => {
+    if(!(await askConfirm('Ganti kunci enkripsi dan enkripsi ulang semua dashboard sekarang?', 'Ganti kunci', true))) return;
+    const b = $('#btnRotate'); b.disabled = true;
+    try { await Dash.rotateKey(t => $('#rotMsg').textContent = t); await refreshDashboards(); toast('Kunci enkripsi diganti.', 'ok'); renderAdminStore(); }
+    catch(ex){ b.disabled = false; $('#rotMsg').textContent = ''; toast('Gagal: ' + ex.message, 'err', 7000); }
+  };
+}
+
+async function checkGhFiles(){
+  const gh = S.dashboards.filter(d => d.storage === 'github');
+  if(!useGH() || !gh.length) return;
+  let have; try { have = await GH.listPaths(); } catch(e){ return; }
+  const missing = gh.filter(d => !have.has(d.file_path));
+  missing.forEach(d => { const td = document.querySelector(`#adminBody tr[data-id="${d.id}"] td.st`); if(td) td.innerHTML = '<span class="pill" style="background:#fef2f2;color:#dc2626">File hilang</span>'; });
+  const box = $('#usageCard');
+  if(missing.length && box) box.insertAdjacentHTML('beforebegin', `<div class="alert alert-err" style="margin-bottom:16px">⚠️ <b>${missing.length} dashboard</b> filenya tidak ditemukan di GitHub: <b>${missing.map(d => esc(d.title)).join(', ')}</b>.<br>Klik <b>Ganti file</b> pada dashboard tersebut, lalu pilih file HTML-nya lagi.</div>`);
+}
+
+async function renderUsage(){
+  const box = $('#usageCard'); if(!box) return;
+  let u; try { u = await api.usageSummary(); } catch(e){ box.innerHTML = ''; return; }
+  if(!u) return;
+  const qGB = CFG.QUOTA_GB || (useGH() ? 100 : 5), quota = qGB * 1024 ** 3, used = +u.month_bytes || 0;
+  const day = new Date().getDate(), days = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).getDate();
+  const proj = day ? used / day * days : used, pct = Math.min(100, used / quota * 100), pctProj = proj / quota * 100;
+  const col = pctProj >= 100 ? 'var(--bad)' : pctProj >= 75 ? 'var(--warn)' : 'var(--ok)';
+  const opens = (+u.downloads || 0) + (+u.cached || 0);
+  const names = Object.fromEntries(S.dashboards.map(d => [d.id, d.title]));
+  box.innerHTML = `<div class="card" style="padding:16px 18px;margin-bottom:16px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px">
+      <div style="font-weight:700">Kuota download bulan ini <span class="t-sub" style="font-weight:500">· batas gratis ${useGH() ? 'GitHub Pages' : 'Supabase'} ${qGB} GB</span></div>
+      <div style="font-weight:700;color:${col}">${fmtSize(used, '0 MB')} <span class="t-sub" style="font-weight:500">(${pct.toFixed(1)}%)</span></div>
+    </div>
+    <div class="progress" style="height:8px;margin:10px 0 8px"><div style="width:${Math.max(pct, .5)}%;background:${col}"></div></div>
+    <div class="t-sub" style="line-height:1.6">Perkiraan sampai akhir bulan: <b style="color:${col}">${fmtSize(proj, '0 MB')}</b> (${pctProj.toFixed(0)}%)${pctProj >= 100 ? ' — <b style="color:var(--bad)">berpotensi melewati batas gratis</b>' : ''}
+      · Dibuka ${opens}× oleh ${u.users || 0} pengguna · <b>${u.cached || 0}×</b> dari cache (tanpa kuota), ${u.downloads || 0}× unduh
+      ${(u.per_dashboard || []).length ? '<br>' + u.per_dashboard.sort((a,b) => b.bytes - a.bytes).map(x => `${esc(names[x.dashboard_id] || 'Dashboard terhapus')}: ${fmtSize(x.bytes)}`).join(' · ') : ''}</div>
+  </div>`;
+}
+
+async function move(d, dir){
+  const list = [...S.dashboards]; const i = list.findIndex(x => x.id === d.id), j = i + dir;
+  if(j < 0 || j >= list.length) return;
+  [list[i], list[j]] = [list[j], list[i]];
+  const items = list.map((x, k) => ({ id:x.id, sort_order:(k+1)*10 })).filter((it, k) => list[k].sort_order !== it.sort_order);
+  try { await api.reorder(items); await refreshDashboards(); renderAdminDash(); } catch(e){ toast('Gagal mengubah urutan: ' + e.message, 'err'); }
+}
+
+const hostOf = u => { try { return new URL(u).host; } catch(e){ return u; } };
+const isLink = d => String(d.storage || '').startsWith('link');
+const linkNewTab = d => d.storage === 'link';            // 'link' = tab baru, 'link-same' = pindah di tab ini, 'link-embed' = di dalam portal
+const linkDirect = d => d.storage === 'link' || d.storage === 'link-same';
+const LINK_IC = '<svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24" style="flex:none;opacity:.7;margin-top:3px"><path d="M14 4h6v6"/><path d="M20 4 10 14"/><path d="M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/></svg>';
+const itemHref = d => linkDirect(d) ? `href="${esc(d.file_path)}"` : `data-nav="#d-${d.id}" tabindex="0" role="link"`;
+const itemAttrs = d => linkNewTab(d) ? `target="_blank" rel="noopener" data-link="${d.id}"` : d.storage === 'link-same' ? `data-link="${d.id}"` : '';
+document.addEventListener('click', e => { const g = e.target.closest('[data-nav]'); if(g){ e.preventDefault(); location.hash = g.dataset.nav; } });
+document.addEventListener('keydown', e => { if(e.key === 'Enter'){ const g = e.target.closest && e.target.closest('[data-nav]'); if(g) location.hash = g.dataset.nav; } });
+document.addEventListener('click', e => {
+  const a = e.target.closest('a[data-link]'); if(!a) return;
+  const d = S.dashboards.find(x => x.id === a.dataset.link); if(!d) return;
+  if(d.storage === 'link-same'){   // catat dulu, lalu pindah halaman
+    e.preventDefault();
+    Promise.race([api.logOpen(d, 0, true), new Promise(r => setTimeout(r, 700))]).then(() => { location.href = d.file_path; });
+  } else api.logOpen(d, 0, true);
+});
+const OTHERS = 'Others';
+const isOther = d => String(d.category || '').toLowerCase() === 'others';
+const placeField = (cur, dflt) => `<div class="field"><label>Tampil di menu</label><select class="input" name="place">
+  <option value="Umum" ${(cur ? !isOther(cur) : dflt !== OTHERS) ? 'selected' : ''}>Menu utama (selalu terlihat)</option>
+  <option value="${OTHERS}" ${(cur ? isOther(cur) : dflt === OTHERS) ? 'selected' : ''}>${esc(OTH_LABEL)} (tersembunyi, tampil saat diklik)</option></select></div>`;
+const nextOrder = () => (S.dashboards.reduce((m, d) => Math.max(m, d.sort_order || 0), 0)) + 10;
+
+function dashModal(d, replaceOnly=false){
+  const isNew = !d;
+  const back = document.createElement('div'); back.className = 'modal-back';
+  back.innerHTML = `
+    <form class="modal" autocomplete="off">
+      <div class="modal-h"><h3>${isNew ? 'Tambah dashboard' : replaceOnly ? 'Ganti file — ' + esc(d.title) : 'Edit dashboard'}</h3><button type="button" class="btn btn-icon btn-sm" data-x>✕</button></div>
+      <div class="modal-b">
+        <div class="${replaceOnly ? 'hidden' : ''}">
+          <div class="row2">
+            <div class="field"><label>Judul di menu</label><input class="input" name="title" value="${esc(d ? d.title : '')}" ${replaceOnly?'':'required'} placeholder="mis. Program AVA & Kabkot Focus"></div>
+            <div class="field"><label>Ikon</label><input class="input" name="icon" value="${esc(d ? d.icon : '📊')}" maxlength="4" style="text-align:center;font-size:18px"></div>
+          </div>
+          ${placeField(d, 'Umum')}
+          <div class="field"><label class="check"><input type="checkbox" name="is_active" ${!d || d.is_active ? 'checked' : ''}> Aktif (tampil untuk semua pengguna)</label></div>
+        </div>
+        <div class="field" style="margin-bottom:0">
+          <label>${isNew ? 'File HTML' : 'File HTML baru' + (replaceOnly ? '' : ' (kosongkan jika tidak diganti)')}</label>
+          <div class="drop" data-drop>
+            <div><b>Klik untuk pilih</b> atau seret file .html ke sini</div>
+            ${d ? `<div class="t-sub" style="margin-top:6px">File saat ini: ${esc(d.file_name || '—')} (${fmtSize(d.file_size)})</div>` : ''}
+            <div class="fname" data-fname></div>
+          </div>
+          <input type="file" name="file" accept=".html,.htm,text/html" hidden>
+          <div class="progress hidden" data-prog><div></div></div>
+        </div>
+        <div data-err></div>
+      </div>
+      <div class="modal-f"><button type="button" class="btn" data-x>Batal</button><button class="btn btn-primary" type="submit" data-save>${isNew ? 'Simpan & publikasikan' : replaceOnly ? 'Unggah versi baru' : 'Simpan perubahan'}</button></div>
+    </form>`;
+  document.body.appendChild(back);
+  const f = back.querySelector('form'), fileIn = f.file, drop = back.querySelector('[data-drop]');
+  let file = null;
+  const close = () => back.remove();
+  back.querySelectorAll('[data-x]').forEach(b => b.onclick = close);
+  back.addEventListener('mousedown', e => { if(e.target === back) close(); });
+  const setFile = async fl => {
+    if(!fl) return;
+    if(!/\.html?$/i.test(fl.name)){ toast('Pilih file .html', 'err'); return; }
+    file = fl; back.querySelector('[data-fname]').textContent = `✓ ${fl.name} (${fmtSize(fl.size)})`;
+    if(isNew && !f.title.value) f.title.value = await titleFromFile(fl);
+  };
+  drop.onclick = () => fileIn.click();
+  fileIn.onchange = () => setFile(fileIn.files[0]);
+  drop.ondragover = e => { e.preventDefault(); drop.classList.add('over'); };
+  drop.ondragleave = () => drop.classList.remove('over');
+  drop.ondrop = e => { e.preventDefault(); drop.classList.remove('over'); setFile(e.dataTransfer.files[0]); };
+  f.onsubmit = async e => {
+    e.preventDefault();
+    const err = back.querySelector('[data-err]'); err.innerHTML = '';
+    if((isNew || replaceOnly) && !file){ err.innerHTML = '<div class="alert alert-err" style="margin:14px 0 0">Pilih file HTML terlebih dahulu.</div>'; return; }
+    const btn = back.querySelector('[data-save]'); btn.disabled = true;
+    const prog = back.querySelector('[data-prog]'), bar = prog.firstElementChild;
+    const step = s => { prog.classList.remove('hidden'); bar.style.width = s === 'pack' ? '20%' : s === 'upload' ? '50%' : '85%'; btn.textContent = s === 'pack' ? (useGH() ? 'Mengompres & mengenkripsi…' : 'Mengompres file…') : s === 'upload' ? (useGH() ? 'Mengunggah ke GitHub…' : 'Mengunggah file…') : 'Menyimpan…'; };
+    const fields = replaceOnly ? {} : { title:f.title.value.trim(), icon:f.icon.value.trim() || '📊', is_active:f.is_active.checked, category:f.place.value };
+    try {
+      let row;
+      if(isNew) row = await Dash.create({ ...fields, file, sort_order:nextOrder() }, step);
+      else row = await Dash.update(d, fields, file, step);
+      bar.style.width = '100%';
+      toast(isNew ? 'Dashboard ditambahkan.' : file ? 'File dashboard diperbarui — pengguna akan melihat versi terbaru.' : 'Perubahan disimpan.', 'ok');
+      close(); await refreshDashboards(); if(S.view === 'admin') renderAdminDash();
+    } catch(ex){
+      console.error(ex); btn.disabled = false; btn.textContent = 'Coba lagi'; prog.classList.add('hidden');
+      err.innerHTML = `<div class="alert alert-err" style="margin:14px 0 0">Gagal: ${esc(ex.message || ex)}</div>`;
+    }
+  };
+}
+
+function linkModal(d){
+  const m = modal(`
+    <form autocomplete="off">
+      <div class="modal-h"><h3>${d ? 'Edit link' : 'Tambah link ke menu'}</h3><button type="button" class="btn btn-icon btn-sm" data-x>✕</button></div>
+      <div class="modal-b">
+        <div class="row2">
+          <div class="field"><label>Judul di menu</label><input class="input" name="title" required value="${esc(d ? d.title : '')}" placeholder="mis. Dashboard Outlet (GitHub)"></div>
+          <div class="field"><label>Ikon</label><input class="input" name="icon" value="${esc(d ? d.icon : '🔗')}" maxlength="4" style="text-align:center;font-size:18px"></div>
+        </div>
+        <div class="field"><label>Alamat link (URL)</label><input class="input" name="url" required value="${esc(d ? d.file_path : '')}" placeholder="https://wj-dashboard.github.io/dashboard/"></div>
+        <div class="field"><label>Cara membuka</label>
+          <label class="check" style="font-weight:500;margin-bottom:6px"><input type="radio" name="mode" value="link" ${!d || d.storage === 'link' ? 'checked' : ''}> Langsung buka web tujuan di <b>tab baru</b> (portal tetap terbuka) — disarankan</label>
+          <label class="check" style="font-weight:500;margin-bottom:6px"><input type="radio" name="mode" value="link-same" ${d && d.storage === 'link-same' ? 'checked' : ''}> Langsung <b>pindah</b> ke web tujuan di tab yang sama</label>
+          <label class="check" style="font-weight:500"><input type="radio" name="mode" value="link-embed" ${d && d.storage === 'link-embed' ? 'checked' : ''}> Tampilkan di dalam portal</label>
+          <div class="t-sub" style="margin-top:6px;line-height:1.5">Portal hanya menyimpan <b>alamat link</b> — data &amp; database web tujuan tetap terpisah dan tidak digabung.</div></div>
+        <div class="field"><label>Catatan kecil <span class="t-sub" style="font-weight:400">(opsional, tampil di bawah judul)</span></label><input class="input" name="note" maxlength="80" value="${esc(noteOf(d))}" placeholder="mis. Wajib pakai VPN kantor"></div>
+        ${placeField(d, OTHERS)}
+        <div class="field" style="margin-bottom:0"><label class="check"><input type="checkbox" name="is_active" ${!d || d.is_active ? 'checked' : ''}> Aktif (tampil untuk semua pengguna)</label></div>
+        <div class="alert alert-warn" style="margin:14px 0 0">Link hanya pintasan: halaman tujuannya <b>tidak ikut dilindungi login portal</b>. Siapa pun yang tahu alamatnya tetap bisa membukanya.</div>
+        <div data-err></div>
+      </div>
+      <div class="modal-f"><button type="button" class="btn" data-x>Batal</button><button class="btn btn-primary" type="submit" data-save>${d ? 'Simpan' : 'Tambah ke menu'}</button></div>
+    </form>`);
+  const f = m.el.querySelector('form');
+  f.onsubmit = async e => {
+    e.preventDefault();
+    let url = f.url.value.trim(); if(url && !/^[a-z]+:\/\//i.test(url)) url = 'https://' + url;
+    const show = t => m.el.querySelector('[data-err]').innerHTML = `<div class="alert alert-err" style="margin:14px 0 0">${esc(t)}</div>`;
+    let ok = false; try { ok = /^https?:$/.test(new URL(url).protocol); } catch(_){}
+    if(!ok) return show('Alamat link tidak valid. Contoh: https://wj-dashboard.github.io/dashboard/');
+    const btn = m.el.querySelector('[data-save]'); btn.disabled = true;
+    const row = { title:f.title.value.trim(), icon:f.icon.value.trim() || '🔗', is_active:f.is_active.checked, category:f.place.value, storage:f.mode.value, file_path:url, file_name:f.note.value.trim() || null, file_size:null, stored_size:null };
+    try {
+      if(d) await api.updateRow(d.id, row); else await api.insertRow({ id:uuid(), sort_order:nextOrder(), ...row });
+      m.close(); toast(d ? 'Link disimpan.' : 'Link ditambahkan ke menu.', 'ok'); await refreshDashboards(); if(S.view === 'admin') renderAdminDash();
+    } catch(ex){ btn.disabled = false; show(ex.message || String(ex)); }
+  };
+}
+
+async function bulkUpload(files){
+  files = files.filter(f => /\.html?$/i.test(f.name));
+  if(!files.length) return;
+  let order = nextOrder(), ok = 0;
+  for(const [i, file] of files.entries()){
+    toast(`Mengunggah ${i+1}/${files.length}: ${file.name}`, '', 2500);
+    try { await Dash.create({ title:await titleFromFile(file), icon:'📊', is_active:true, file, sort_order:order }); order += 10; ok++; }
+    catch(e){ console.error(e); toast(`Gagal: ${file.name} — ${e.message}`, 'err', 6000); }
+  }
+  toast(`${ok} dari ${files.length} dashboard berhasil ditambahkan. Atur judul & ikon lewat tombol Edit.`, 'ok', 6000);
+  await refreshDashboards(); if(S.view === 'admin') renderAdminDash();
+}
+
+function askConfirm(msg, okText='Ya', danger=false){
+  return new Promise(res => {
+    const m = modal(`<div class="modal-b" style="padding-top:24px"><p style="margin:0;line-height:1.55;font-size:14.5px">${esc(msg)}</p></div>
+      <div class="modal-f"><button class="btn" data-no>Batal</button><button class="btn ${danger ? 'btn-danger' : 'btn-primary'}" data-yes>${esc(okText)}</button></div>`);
+    m.el.querySelector('.modal').style.maxWidth = '420px';
+    const done = v => { m.close(); res(v); };
+    m.el.querySelector('[data-no]').onclick = () => done(false);
+    m.el.querySelector('[data-yes]').onclick = () => done(true);
+    m.el.addEventListener('mousedown', e => { if(e.target === m.el) res(false); });
+    setTimeout(() => m.el.querySelector('[data-yes]').focus(), 30);
+  });
+}
+
+/* ---------- ADMIN: PENGGUNA ---------- */
+S.uf = { q:'', area:'', pos:'', sort:'online' };
+const posList = () => [...new Set([...(CFG.POSITIONS || []), ...(S.users || []).map(u => u.position).filter(Boolean)])].sort((a,b) => a.localeCompare(b));
+const posDatalist = id => `<datalist id="${id}">${posList().map(a => `<option value="${esc(a)}">`).join('')}</datalist>`;
+const areaList = () => [...new Set([...(CFG.AREAS || []), ...(S.users || []).map(u => u.area).filter(Boolean)])].sort((a,b) => a.localeCompare(b));
+const areaDatalist = id => `<datalist id="${id}">${areaList().map(a => `<option value="${esc(a)}">`).join('')}</datalist>`;
+
+function modal(html, cls=''){
+  const back = document.createElement('div'); back.className = 'modal-back';
+  back.innerHTML = `<div class="modal ${cls}">${html}</div>`;
+  document.body.appendChild(back);
+  const close = () => back.remove();
+  back.querySelectorAll('[data-x]').forEach(b => b.onclick = close);
+  back.addEventListener('mousedown', e => { if(e.target === back && !back.dataset.lock) close(); });
+  return { el:back, close };
+}
+
+async function renderAdminUsers(){
+  $('#adminActs').innerHTML = `
+    <button class="btn" id="btnRefUsers" title="Segarkan">↻</button>
+    <button class="btn" id="btnImportUsers"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v4h16v-4"/></svg>Impor daftar user</button>
+    <button class="btn btn-primary" id="btnAddUser"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Tambah user</button>`;
+  $('#btnRefUsers').onclick = renderAdminUsers;
+  $('#btnAddUser').onclick = () => userModal(null);
+  $('#btnImportUsers').onclick = importModal;
+  const body = $('#adminBody'); body.innerHTML = '<div class="card empty-state">Memuat pengguna…</div>';
+  let reqs = [];
+  try { [S.users, reqs] = await Promise.all([api.listUsers(), api.listResetRequests().catch(() => [])]); }
+  catch(e){ body.innerHTML = `<div class="alert alert-err">Gagal memuat pengguna: ${esc(e.message)}</div>`; return; }
+  const byId = Object.fromEntries(S.users.map(u => [u.id, u]));
+  body.innerHTML = `
+    ${reqs.length ? `<div class="card req-card"><div class="req-h">🔑 ${reqs.length} permintaan reset password</div>
+      ${reqs.map(r => { const u = byId[r.user_id] || {}; return `<div class="req-row">
+        <div><b>${esc(u.full_name || r.username)}</b> <span class="t-sub">· ${esc(r.username)}${u.area ? ' · ' + esc(u.area) : ''} · ${fmtDate(r.requested_at)}</span></div>
+        <div class="acts"><button class="btn btn-sm btn-primary" data-req-reset="${esc(r.user_id)}">Reset password</button><button class="btn btn-sm" data-req-dismiss="${esc(r.id)}">Abaikan</button></div></div>`; }).join('')}</div>` : ''}
+    <div class="filters">
+      <input class="input" id="uQ" placeholder="Cari nama / NIK / username…" value="${esc(S.uf.q)}">
+      <select class="input" id="uArea"><option value="">Semua area</option>${areaList().map(a => `<option ${a === S.uf.area ? 'selected' : ''}>${esc(a)}</option>`).join('')}<option value="__none" ${S.uf.area === '__none' ? 'selected' : ''}>(Tanpa area)</option></select>
+      <select class="input" id="uPos" style="min-width:150px"><option value="">Semua role</option>${posList().map(a => `<option ${a === S.uf.pos ? 'selected' : ''}>${esc(a)}</option>`).join('')}<option value="__none" ${S.uf.pos === '__none' ? 'selected' : ''}>(Tanpa role)</option></select>
+      <select class="input" id="uSort" style="min-width:170px" title="Urutkan">
+        ${[['online','Urut: Online dulu'],['last','Urut: Terakhir aktif'],['name','Urut: Nama A–Z'],['area','Urut: Area'],['pos','Urut: Role']].map(([v,l]) => `<option value="${v}" ${S.uf.sort===v?'selected':''}>${l}</option>`).join('')}
+      </select>
+      <span class="t-sub" id="uCount"></span>
+      <button class="btn btn-sm" id="btnExportUsers" style="margin-left:auto">Unduh daftar (CSV)</button>
+    </div>
+    <div class="card"><table class="tbl">
+      <thead><tr><th>Pengguna</th><th>Role</th><th>Area</th><th>Akses</th><th>Sesi</th><th class="hide-sm">Perangkat · terakhir aktif · IP</th><th style="text-align:right">Aksi</th></tr></thead>
+      <tbody id="uBody"></tbody></table></div>
+    <p class="help">🔑 <b>Reset mandiri:</b> pengguna menekan <b>Lupa password?</b> di halaman masuk → isi username + PIN pemulihan 6 digit + password baru. PIN dibuat sendiri oleh pengguna saat pertama login.<br>
+      🛟 <b>Lupa PIN / belum punya PIN:</b> permintaannya muncul di atas daftar ini → klik <b>Reset password</b> → beri password sementara; saat login pengguna wajib membuat password &amp; PIN baru.<br>
+      🔒 Mode sesi: <b>${CFG.SESSION_MODE === 'block' ? 'BLOCK — login kedua ditolak selama sesi pertama masih aktif' : 'KICK — login baru otomatis mengeluarkan sesi lama'}</b>.</p>`;
+  body.querySelectorAll('[data-req-reset]').forEach(b => b.onclick = () => { const u = byId[b.dataset.reqReset]; if(u) resetModal(u); });
+  body.querySelectorAll('[data-req-dismiss]').forEach(b => b.onclick = async () => { try { await api.dismissReset(b.dataset.reqDismiss); renderAdminUsers(); } catch(e){ toast('Gagal: ' + e.message, 'err'); } });
+  $('#uQ').oninput = e => { S.uf.q = e.target.value; drawUserRows(); };
+  $('#uArea').onchange = e => { S.uf.area = e.target.value; drawUserRows(); };
+  $('#uPos').onchange = e => { S.uf.pos = e.target.value; drawUserRows(); };
+  $('#uSort').onchange = e => { S.uf.sort = e.target.value; drawUserRows(); };
+  $('#btnExportUsers').onclick = () => downloadCSV('daftar-user-wj-portal.csv', [['nik','nama','username','role','area','akses','email'], ...filteredUsers().map(u => [u.nik, u.full_name, u.username, u.position, u.area, u.role, u.email])]);
+  drawUserRows();
+}
+
+function filteredUsers(){
+  const q = S.uf.q.trim().toLowerCase();
+  return (S.users || []).filter(u => (!q || `${u.full_name} ${u.username} ${u.email} ${u.nik || ''}`.toLowerCase().includes(q))
+    && (!S.uf.area || (S.uf.area === '__none' ? !u.area : u.area === S.uf.area))
+    && (!S.uf.pos || (S.uf.pos === '__none' ? !u.position : u.position === S.uf.pos)));
+}
+
+function drawUserRows(){
+  const activeWindow = Math.max(CFG.HEARTBEAT_SECONDS * 3, 90) * 1000;
+  const dead = s => !s || ['revoked','released'].includes(s.session_id);
+  const rank = u => dead(u.session) ? 2 : (Date.now() - new Date(u.session.last_seen).getTime() < activeWindow ? 0 : 1);
+  const seen = u => u.session ? new Date(u.session.last_seen).getTime() : 0;
+  const nm = u => (u.full_name || u.username || '').toLowerCase();
+  const by = { online:(a,b) => rank(a) - rank(b) || seen(b) - seen(a) || nm(a).localeCompare(nm(b)),
+               last:(a,b) => seen(b) - seen(a) || nm(a).localeCompare(nm(b)),
+               name:(a,b) => nm(a).localeCompare(nm(b)),
+               area:(a,b) => (a.area || '~').localeCompare(b.area || '~') || rank(a) - rank(b) || nm(a).localeCompare(nm(b)),
+               pos:(a,b) => (a.position || '~').localeCompare(b.position || '~') || rank(a) - rank(b) || nm(a).localeCompare(nm(b)) };
+  const list = filteredUsers().sort(by[S.uf.sort] || by.online);
+  const nOn = list.filter(u => rank(u) === 0).length;
+  const status = s => dead(s) ? '<span class="pill pill-off">Offline</span>'
+    : (Date.now() - new Date(s.last_seen).getTime() < activeWindow ? '<span class="pill pill-ok">Online</span>' : '<span class="pill pill-warn">Tidak aktif</span>');
+  $('#uCount').innerHTML = `<b style="color:var(--ok)">● ${nOn} online</b> · ${list.length} dari ${S.users.length} pengguna`;
+  $('#uBody').innerHTML = list.length ? list.map(u => `
+    <tr data-id="${esc(u.id)}">
+      <td><div style="font-weight:700">${esc(u.full_name || u.username)}${u.must_change_password ? '<span class="tag" title="Belum mengganti password sementara">pw sementara</span>' : ''}${u.pin_locked ? '<span class="tag" style="background:#fee2e2;color:#991b1b" title="Terlalu banyak PIN salah; terkunci 15 menit">PIN terkunci</span>' : !u.has_pin && !u.must_change_password ? '<span class="tag" style="background:#f1f5f9;color:#64748b" title="Belum membuat PIN pemulihan">tanpa PIN</span>' : ''}</div><div class="t-sub">${u.nik ? 'NIK ' + esc(u.nik) + ' · ' : ''}${esc(u.username)}</div></td>
+      <td>${u.position ? `<span class="tag" style="margin:0;background:#ede9fe;color:#5b21b6">${esc(u.position)}</span>` : '<span class="muted-t">—</span>'}</td>
+      <td>${u.area ? esc(u.area) : '<span class="muted-t">—</span>'}</td>
+      <td><span class="tag tag-${u.role}" style="margin:0">${u.role === 'admin' ? 'Admin' : 'Viewer'}</span></td>
+      <td>${status(u.session)}</td>
+      <td class="hide-sm">${u.session ? esc(deviceOf(u.session.user_agent)) + '<div class="t-sub">' + fmtDate(u.session.last_seen) + (u.session.ip ? ' · IP ' + esc(u.session.ip) : '') + '</div>' : '—'}</td>
+      <td><div class="acts">
+        <button class="btn btn-sm" data-a="edit">Edit</button>
+        <button class="btn btn-sm" data-a="reset" ${u.id === S.user.id ? 'disabled title="Gunakan menu Ganti password"' : ''}>Reset pw</button>
+        <button class="btn btn-sm" data-a="kick" ${dead(u.session) || u.id === S.user.id ? 'disabled' : ''}>Logout</button>
+        <button class="btn btn-sm btn-danger" data-a="del" ${u.id === S.user.id ? 'disabled' : ''} title="Hapus pengguna">✕</button>
+      </div></td>
+    </tr>`).join('') : '<tr><td colspan="7" class="empty-state">Tidak ada pengguna yang cocok.</td></tr>';
+  $('#uBody').querySelectorAll('tr[data-id]').forEach(tr => {
+    const u = S.users.find(x => x.id === tr.dataset.id);
+    tr.querySelector('[data-a=edit]').onclick = () => userModal(u);
+    tr.querySelector('[data-a=reset]').onclick = () => resetModal(u);
+    tr.querySelector('[data-a=kick]').onclick = async () => {
+      if(!(await askConfirm(`Keluarkan ${u.full_name || u.username} dari portal sekarang?`, 'Keluarkan', true))) return;
+      try { await api.forceLogout(u.id); toast('Pengguna telah dikeluarkan.', 'ok'); renderAdminUsers(); } catch(e){ toast('Gagal: ' + e.message, 'err'); }
+    };
+    tr.querySelector('[data-a=del]').onclick = async () => {
+      if(!(await askConfirm(`Hapus pengguna ${u.full_name || u.username} (${u.username})? Akun tidak bisa dipakai login lagi.`, 'Hapus', true))) return;
+      try { await api.deleteUser(u.id); toast('Pengguna dihapus.', 'ok'); renderAdminUsers(); } catch(e){ toast('Gagal: ' + e.message, 'err'); }
+    };
+  });
+}
+
+function userModal(u){
+  const isNew = !u;
+  const m = modal(`
+    <form autocomplete="off">
+      <div class="modal-h"><h3>${isNew ? 'Tambah pengguna' : 'Edit pengguna'}</h3><button type="button" class="btn btn-icon btn-sm" data-x>✕</button></div>
+      <div class="modal-b">
+        <div class="field"><label>Username</label><input class="input" name="username" value="${esc(u ? u.username : '')}" ${isNew ? 'required pattern="[A-Za-z0-9._\\-]{3,40}" title="3–40 karakter: huruf, angka, titik, minus, garis bawah"' : 'disabled'} placeholder="mis. budi.santoso">
+          ${isNew ? `<div class="t-sub" style="margin-top:4px">Login dengan username ini (akun: username@${esc(CFG.USERNAME_DOMAIN)})</div>` : ''}</div>
+        <div class="row2" style="grid-template-columns:160px 1fr">
+          <div class="field"><label>NIK</label><input class="input" name="nik" value="${esc(u ? u.nik || '' : '')}" placeholder="mis. 92010123" inputmode="numeric"></div>
+          <div class="field"><label>Nama lengkap</label><input class="input" name="full_name" value="${esc(u ? u.full_name || '' : '')}" placeholder="mis. Budi Santoso"></div>
+        </div>
+        <div class="row2" style="grid-template-columns:1fr 1fr">
+          <div class="field"><label>Role</label><input class="input" name="position" list="dlPos" value="${esc(u ? u.position || '' : '')}" placeholder="mis. DSO">${posDatalist('dlPos')}</div>
+          <div class="field"><label>Area</label><input class="input" name="area" list="dlArea" value="${esc(u ? u.area || '' : '')}" placeholder="mis. KOTA BANDUNG">${areaDatalist('dlArea')}</div>
+        </div>
+        <div class="row2" style="grid-template-columns:1fr">
+          <div class="field"><label>Hak akses portal</label><select class="input" name="role" ${u && u.id === S.user.id ? 'disabled title="Tidak bisa mengubah role sendiri"' : ''}>
+            <option value="viewer" ${!u || u.role === 'viewer' ? 'selected' : ''}>Viewer — hanya melihat dashboard</option><option value="admin" ${u && u.role === 'admin' ? 'selected' : ''}>Admin — kelola dashboard &amp; user</option></select></div>
+        </div>
+        ${isNew ? `<div class="field" style="margin-bottom:0"><label>Password sementara</label><div style="display:flex;gap:8px"><input class="input" name="password" value="${genPw()}" required minlength="${CFG.MIN_PASSWORD}"><button type="button" class="btn" data-gen title="Buat acak">↻</button></div>
+          <div class="t-sub" style="margin-top:4px">Pengguna wajib mengganti password ini saat pertama login.</div></div>` : ''}
+        <div data-err></div>
+      </div>
+      <div class="modal-f"><button type="button" class="btn" data-x>Batal</button><button class="btn btn-primary" type="submit" data-save>${isNew ? 'Buat akun' : 'Simpan'}</button></div>
+    </form>`);
+  const f = m.el.querySelector('form');
+  const g = m.el.querySelector('[data-gen]'); if(g) g.onclick = () => f.password.value = genPw();
+  f.onsubmit = async e => {
+    e.preventDefault();
+    const btn = m.el.querySelector('[data-save]'); btn.disabled = true;
+    const data = { nik:f.nik.value.trim(), full_name:f.full_name.value.trim(), area:f.area.value.trim().toUpperCase(), position:f.position.value.trim().toUpperCase() };
+    if(!f.role.disabled) data.role = f.role.value;
+    try {
+      if(isNew){
+        data.username = normUser(f.username.value); data.password = f.password.value;
+        await api.createUserFull(data); m.close();
+        credsModal('Akun dibuat', [{ ...data }]);
+      } else { await api.updateUser(u.id, data); m.close(); toast('Data pengguna disimpan.', 'ok'); }
+      renderAdminUsers();
+    } catch(ex){ btn.disabled = false; m.el.querySelector('[data-err]').innerHTML = `<div class="alert alert-err" style="margin:14px 0 0">${esc(friendlyErr(ex))}</div>`; }
+  };
+}
+
+function friendlyErr(e){
+  const m = (e && e.message) || String(e);
+  if(/already|sudah dipakai|duplicate|unique/i.test(m)) return 'Username sudah dipakai.';
+  if(/admin only/i.test(m)) return 'Hanya admin yang boleh melakukan ini.';
+  if(/password/i.test(m) && /short|min/i.test(m)) return `Password minimal ${CFG.MIN_PASSWORD} karakter.`;
+  return m;
+}
+
+function resetModal(u){
+  const m = modal(`
+    <form autocomplete="off">
+      <div class="modal-h"><h3>Reset password</h3><button type="button" class="btn btn-icon btn-sm" data-x>✕</button></div>
+      <div class="modal-b">
+        <p style="margin:0 0 14px">Buat password sementara untuk <b>${esc(u.full_name || u.username)}</b> (${esc(u.username)}${u.area ? ' · ' + esc(u.area) : ''}). Sesi yang sedang aktif akan dikeluarkan, dan pengguna wajib membuat password baru saat login.</p>
+        <div class="field" style="margin-bottom:0"><label>Password sementara</label><div style="display:flex;gap:8px"><input class="input" name="password" value="${genPw()}" required minlength="${CFG.MIN_PASSWORD}"><button type="button" class="btn" data-gen>↻</button></div></div>
+        <div data-err></div>
+      </div>
+      <div class="modal-f"><button type="button" class="btn" data-x>Batal</button><button class="btn btn-primary" type="submit" data-save>Reset password</button></div>
+    </form>`);
+  const f = m.el.querySelector('form');
+  m.el.querySelector('[data-gen]').onclick = () => f.password.value = genPw();
+  f.onsubmit = async e => {
+    e.preventDefault(); const btn = m.el.querySelector('[data-save]'); btn.disabled = true;
+    try { await api.resetPassword(u.id, f.password.value); m.close();
+      credsModal('Password direset', [{ username:u.username, full_name:u.full_name, area:u.area, password:f.password.value }]); renderAdminUsers(); }
+    catch(ex){ btn.disabled = false; m.el.querySelector('[data-err]').innerHTML = `<div class="alert alert-err" style="margin:14px 0 0">${esc(friendlyErr(ex))}</div>`; }
+  };
+}
+
+function credsModal(title, list){
+  const portalUrl = location.origin + location.pathname;
+  const text = list.map(c => `Portal: ${portalUrl}\nUsername: ${c.username}\nPassword sementara: ${c.password}`).join('\n\n');
+  const m = modal(`
+    <div class="modal-h"><h3>${esc(title)}</h3><button type="button" class="btn btn-icon btn-sm" data-x>✕</button></div>
+    <div class="modal-b">
+      <div class="alert alert-warn">Simpan / bagikan sekarang — password tidak bisa dilihat lagi setelah jendela ini ditutup.</div>
+      <div class="scroll-tbl"><table class="tbl"><thead><tr><th>Username</th><th>NIK</th><th>Nama</th><th>Role</th><th>Area</th><th>Password sementara</th></tr></thead>
+        <tbody>${list.map(c => `<tr><td>${esc(c.username)}</td><td>${esc(c.nik || '')}</td><td>${esc(c.full_name || '')}</td><td>${esc(c.position || '')}</td><td>${esc(c.area || '')}</td><td><span class="mono">${esc(c.password)}</span></td></tr>`).join('')}</tbody></table></div>
+    </div>
+    <div class="modal-f"><button class="btn" data-copy>Salin teks</button><button class="btn" data-csv>Unduh CSV</button><button class="btn btn-primary" data-x>Selesai</button></div>`, list.length > 1 ? 'wide' : '');
+  m.el.dataset.lock = '1';
+  m.el.querySelector('[data-copy]').onclick = async () => { try { await navigator.clipboard.writeText(text); toast('Disalin ke clipboard.', 'ok'); } catch(e){ toast('Gagal menyalin; gunakan Unduh CSV.', 'err'); } };
+  m.el.querySelector('[data-csv]').onclick = () => downloadCSV('akun-wj-portal.csv', [['username','nik','nama','role','area','password_sementara','portal'], ...list.map(c => [c.username, c.nik, c.full_name, c.position, c.area, c.password, portalUrl])]);
+}
+
+/* --- impor daftar user --- */
+function parseUserList(text){
+  const lines = text.replace(/\r/g, '').split('\n').filter(l => l.trim());
+  if(!lines.length) return [];
+  const first = lines[0];
+  const delim = first.includes('\t') ? '\t' : (first.split(';').length > first.split(',').length ? ';' : ',');
+  let rows = lines.map(l => l.split(delim).map(c => c.trim().replace(/^"(.*)"$/, '$1').trim()));
+  let cols = ['username', 'nik', 'full_name', 'position', 'area', 'role', 'password'];
+  const h = rows[0].map(c => c.toLowerCase());
+  if(h.some(c => /user|nama|name|area|role|pass|jabatan|posisi|nik|akses/.test(c))){
+    cols = h.map(c => /user/.test(c) ? 'username' : /^(nik|nip|no\.? ?karyawan|id ?karyawan|employee ?id)$/.test(c) ? 'nik' : /akses|level|hak|access/.test(c) ? 'role' : /role|jabatan|posisi|position|title/.test(c) ? 'position' : /nama|name/.test(c) ? 'full_name' : /area|wilayah|branch|cluster/.test(c) ? 'area' : /pass/.test(c) ? 'password' : null);
+    rows = rows.slice(1);
+  }
+  return rows.map(r => { const o = { username:'', nik:'', full_name:'', position:'', area:'', role:'', password:'' }; cols.forEach((c, i) => { if(c) o[c] = r[i] || ''; }); return o; });
+}
+
+function validateImport(rows){
+  const existing = new Set((S.users || []).map(u => u.username));
+  const seen = new Set();
+  return rows.map(r => {
+    let pos = (r.position || '').trim().toUpperCase(), roleTxt = (r.role || '').trim();
+    if(/^(admin|viewer|user)$/i.test(pos) && !roleTxt){ roleTxt = pos; pos = ''; }                       // kolom role berisi admin/viewer → jadi hak akses
+    if(!pos && roleTxt && !/^(admin|viewer|user)$/i.test(roleTxt)){ pos = roleTxt.toUpperCase(); roleTxt = ''; }
+    const o = { username:normUser(r.username || r.nik), nik:(r.nik || '').trim(), full_name:r.full_name, position:pos, area:(r.area || '').toUpperCase(),
+      role:/^admin$/i.test(roleTxt) || /admin/i.test(r.akses || '') ? 'admin' : 'viewer', password:r.password || genPw(), err:'' };
+    if(!o.username) o.err = 'Username kosong';
+    else if(!/^[a-z0-9._-]{3,40}$/.test(o.username)) o.err = 'Username tidak valid';
+    else if(existing.has(o.username)) o.err = 'Sudah terdaftar';
+    else if(seen.has(o.username)) o.err = 'Duplikat di daftar';
+    else if(o.password.length < CFG.MIN_PASSWORD) o.err = `Password < ${CFG.MIN_PASSWORD} karakter`;
+    seen.add(o.username);
+    return o;
+  });
+}
+
+function importModal(){
+  const m = modal(`
+    <div class="modal-h"><h3>Impor daftar user</h3><button type="button" class="btn btn-icon btn-sm" data-x>✕</button></div>
+    <div class="modal-b">
+      <p style="margin:0 0 10px;line-height:1.55">Salin langsung dari Excel (termasuk baris judul) lalu tempel di bawah, atau pilih file CSV. Kolom: <span class="mono">username</span> <span class="mono">nik</span> <span class="mono">nama</span> <span class="mono">role</span> <span class="mono">area</span> <span class="mono">akses</span> <span class="mono">password</span> — wajib <b>username</b> (jika kosong, NIK dipakai sebagai username). Role mis. DSO / DSP / HOA. Akses kosong = Viewer (isi <b>admin</b> untuk admin). Password kosong = dibuat otomatis.</p>
+      <textarea class="input" data-text placeholder="username&#9;nik&#9;nama&#9;role&#9;area&#9;akses&#10;budi.s&#9;92010123&#9;Budi Santoso&#9;DSO&#9;KOTA BANDUNG&#9;viewer&#10;rina.k&#9;92010456&#9;Rina Kartika&#9;HOA&#9;REGION&#9;viewer"></textarea>
+      <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
+        <label class="btn btn-sm">Pilih file CSV<input type="file" accept=".csv,.txt,.tsv" data-file hidden></label>
+        <button class="btn btn-sm" data-tpl>Unduh template</button>
+        <button class="btn btn-sm btn-primary" data-preview style="margin-left:auto">Periksa daftar →</button>
+      </div>
+      <div data-prev style="margin-top:14px"></div>
+    </div>
+    <div class="modal-f"><button class="btn" data-x>Batal</button><button class="btn btn-primary" data-go disabled>Impor</button></div>`, 'wide');
+  const ta = m.el.querySelector('[data-text]'), prev = m.el.querySelector('[data-prev]'), go = m.el.querySelector('[data-go]');
+  let rows = [];
+  m.el.querySelector('[data-tpl]').onclick = () => downloadCSV('template-user-wj-portal.csv', [['username','nik','nama','role','area','akses','password'], ['budi.s','92010123','Budi Santoso','DSO','KOTA BANDUNG','viewer',''], ['rina.k','92010456','Rina Kartika','HOA','REGION','viewer','']]);
+  m.el.querySelector('[data-file]').onchange = async e => { const f = e.target.files[0]; if(f){ ta.value = await f.text(); preview(); } };
+  m.el.querySelector('[data-preview]').onclick = preview;
+  ta.addEventListener('paste', () => setTimeout(preview, 50));
+  function preview(){
+    rows = validateImport(parseUserList(ta.value));
+    const ok = rows.filter(r => !r.err).length;
+    go.disabled = !ok; go.textContent = ok ? `Impor ${ok} user` : 'Impor';
+    prev.innerHTML = rows.length ? `
+      <div class="t-sub" style="margin-bottom:6px"><b class="ok-t">${ok} siap diimpor</b>${rows.length - ok ? ` · <b class="bad-t">${rows.length - ok} dilewati</b>` : ''}</div>
+      <div class="scroll-tbl"><table class="tbl"><thead><tr><th>Username</th><th>NIK</th><th>Nama</th><th>Role</th><th>Area</th><th>Akses</th><th>Status</th></tr></thead>
+      <tbody>${rows.map(r => `<tr><td>${esc(r.username || '—')}</td><td>${esc(r.nik)}</td><td>${esc(r.full_name)}</td><td>${esc(r.position)}</td><td>${esc(r.area)}</td><td>${r.role}</td><td class="${r.err ? 'bad-t' : 'ok-t'}" data-st>${r.err ? esc(r.err) : 'OK'}</td></tr>`).join('')}</tbody></table></div>`
+      : '<div class="alert alert-warn">Belum ada data yang terbaca.</div>';
+  }
+  go.onclick = async () => {
+    const todo = rows.filter(r => !r.err); if(!todo.length) return;
+    go.disabled = true; m.el.dataset.lock = '1';
+    const cells = [...prev.querySelectorAll('[data-st]')]; const done = [];
+    for(const [i, r] of rows.entries()){
+      if(r.err) continue;
+      go.textContent = `Mengimpor ${done.length + 1}/${todo.length}…`; cells[i].textContent = '…'; cells[i].className = 'muted-t';
+      try { await api.createUserFull(r); done.push(r); cells[i].textContent = 'Dibuat'; cells[i].className = 'ok-t'; }
+      catch(e){ cells[i].textContent = friendlyErr(e); cells[i].className = 'bad-t'; }
+    }
+    m.close(); renderAdminUsers();
+    if(done.length) credsModal(`${done.length} akun dibuat`, done); else toast('Tidak ada akun yang berhasil dibuat.', 'err');
+  };
+}
+
+
+/* ---------- LAPORAN AKTIVITAS ---------- */
+S.rf = { period:'7d', from:'', to:'', area:'', pos:'', q:'', status:'' };
+const dayStart = d => { const x = new Date(d); x.setHours(0,0,0,0); return x; };
+const ymd = d => { const x = new Date(d); return `${x.getFullYear()}-${String(x.getMonth()+1).padStart(2,'0')}-${String(x.getDate()).padStart(2,'0')}`; };
+function reportRange(){
+  const now = new Date(), t0 = dayStart(now), end = new Date(t0.getTime() + 86400000);
+  switch(S.rf.period){
+    case 'today': return [t0, end];
+    case 'yesterday': return [new Date(t0.getTime() - 86400000), t0];
+    case '30d': return [new Date(t0.getTime() - 29 * 86400000), end];
+    case 'month': return [new Date(now.getFullYear(), now.getMonth(), 1), end];
+    case 'all': return [new Date(2020, 0, 1), end];
+    case 'custom': { const f = S.rf.from ? dayStart(S.rf.from) : new Date(t0.getTime() - 6 * 86400000); const t = S.rf.to ? new Date(dayStart(S.rf.to).getTime() + 86400000) : end; return [f, t]; }
+    default: return [new Date(t0.getTime() - 6 * 86400000), end];
+  }
+}
+const ago = d => { if(!d) return ''; const s = (Date.now() - new Date(d)) / 1000; return s < 60 ? 'baru saja' : s < 3600 ? Math.floor(s/60) + ' mnt lalu' : s < 86400 ? Math.floor(s/3600) + ' jam lalu' : Math.floor(s/86400) + ' hari lalu'; };
+
+async function renderAdminReport(){
+  $('#adminActs').innerHTML = `<button class="btn" id="btnRepRefresh" title="Segarkan">↻</button>
+    <button class="btn" id="btnRepCsv">Unduh laporan (CSV)</button><button class="btn" id="btnLogCsv">Unduh log (CSV)</button>`;
+  const body = $('#adminBody');
+  const f = S.rf;
+  body.innerHTML = `
+    <div class="filters">
+      <select class="input" id="rPeriod" style="min-width:150px">
+        ${[['today','Hari ini'],['yesterday','Kemarin'],['7d','7 hari terakhir'],['30d','30 hari terakhir'],['month','Bulan ini'],['all','Sejak awal'],['custom','Pilih tanggal…']].map(([v,l]) => `<option value="${v}" ${f.period===v?'selected':''}>${l}</option>`).join('')}
+      </select>
+      <span id="rCustom" class="${f.period==='custom'?'':'hidden'}" style="display:inline-flex;gap:6px;align-items:center">
+        <input class="input" type="date" id="rFrom" value="${esc(f.from)}" style="min-width:0;width:150px"> – <input class="input" type="date" id="rTo" value="${esc(f.to)}" style="min-width:0;width:150px"></span>
+      <select class="input" id="rArea" style="min-width:150px"><option value="">Semua area</option>${areaList().map(a => `<option ${a===f.area?'selected':''}>${esc(a)}</option>`).join('')}</select>
+      <select class="input" id="rPos" style="min-width:140px"><option value="">Semua role</option>${posList().map(a => `<option ${a===f.pos?'selected':''}>${esc(a)}</option>`).join('')}</select>
+      <select class="input" id="rStatus" style="min-width:150px">${[['','Semua pengguna'],['yes','Sudah login'],['no','Belum login']].map(([v,l]) => `<option value="${v}" ${f.status===v?'selected':''}>${l}</option>`).join('')}</select>
+      <input class="input" id="rQ" placeholder="Cari nama / NIK…" value="${esc(f.q)}" style="min-width:160px">
+    </div>
+    <div id="repBody"><div class="card empty-state">Memuat laporan…</div></div>`;
+  const reload = () => renderAdminReport();
+  $('#rPeriod').onchange = e => { f.period = e.target.value; if(f.period === 'custom' && !f.from){ f.from = ymd(Date.now() - 6*86400000); f.to = ymd(Date.now()); } reload(); };
+  $('#rFrom').onchange = e => { f.from = e.target.value; reload(); };
+  $('#rTo').onchange = e => { f.to = e.target.value; reload(); };
+  $('#rArea').onchange = e => { f.area = e.target.value; drawReport(); };
+  $('#rPos').onchange = e => { f.pos = e.target.value; drawReport(); };
+  $('#rStatus').onchange = e => { f.status = e.target.value; drawReport(); };
+  $('#rQ').oninput = e => { f.q = e.target.value; drawReport(); };
+  $('#btnRepRefresh').onclick = reload;
+  const [from, to] = reportRange();
+  try {
+    const [users, rep] = await Promise.all([S.users ? Promise.resolve(S.users) : api.listUsers(), api.activityReport(from.toISOString(), to.toISOString())]);
+    S.users = users; S.rep = { ...rep, from, to };
+  } catch(e){ $('#repBody').innerHTML = `<div class="alert alert-err">Gagal memuat laporan: ${esc(e.message)}</div>`; return; }
+  $('#btnRepCsv').onclick = () => { const r = buildReport(); downloadCSV(`laporan-akses${S.rf.status === 'no' ? '-belum-login' : S.rf.status === 'yes' ? '-sudah-login' : ''}-${S.rf.period === 'all' ? 'sejak-awal' : ymd(from)}_${ymd(to - 1)}.csv`,
+    [['nik','nama','username','role','area','status','jumlah_login','login_terakhir','ip_terakhir','dashboard_dibuka','akses_terakhir', ...S.dashboards.map(d => d.title)],
+     ...r.rows.map(x => [x.u.nik, x.u.full_name, x.u.username, x.u.position, x.u.area, (x.logins || x.opens) ? 'Sudah login' : 'Belum login', x.logins, x.lastLogin ? fmtDate(x.lastLogin) : '', x.lastIp || '', x.opens, x.lastOpen ? fmtDate(x.lastOpen) : '', ...S.dashboards.map(d => x.per[d.id] || 0)])]); };
+  $('#btnLogCsv').onclick = () => { const nm = userMap(); const dn = dashMap(); downloadCSV(`log-aktivitas-${ymd(from)}_${ymd(to - 1)}.csv`,
+    [['waktu','nik','nama','username','role','area','aktivitas','dashboard','ip'], ...(S.rep.recent || []).map(e => { const u = nm[e.user_id] || {}; return [fmtDate(e.at), u.nik, u.full_name, u.username, u.position, u.area, e.t === 'login' ? 'Login' : 'Buka dashboard', e.t === 'open' ? (dn[e.dashboard_id] || 'Dashboard terhapus') : '', e.ip || '']; })]); };
+  drawReport();
+}
+const userMap = () => Object.fromEntries((S.users || []).map(u => [u.id, u]));
+const dashMap = () => Object.fromEntries(S.dashboards.map(d => [d.id, d.title]));
+
+function buildReport(){
+  const f = S.rf, rep = S.rep || { logins:[], opens:[] }, q = f.q.trim().toLowerCase();
+  const L = Object.fromEntries((rep.logins || []).map(x => [x.user_id, x]));
+  const O = {};
+  (rep.opens || []).forEach(x => { const o = O[x.user_id] = O[x.user_id] || { n:0, last:null, per:{} }; o.n += +x.n; o.per[x.dashboard_id] = (o.per[x.dashboard_id] || 0) + +x.n; if(!o.last || x.last > o.last) o.last = x.last; });
+  const allRows = (S.users || []).filter(u => (!f.area || u.area === f.area) && (!f.pos || u.position === f.pos) && (!q || `${u.full_name} ${u.username} ${u.nik || ''}`.toLowerCase().includes(q)))
+    .map(u => ({ u, logins:L[u.id] ? +L[u.id].n : 0, lastLogin:L[u.id] && L[u.id].last, lastIp:L[u.id] && L[u.id].last_ip, opens:O[u.id] ? O[u.id].n : 0, lastOpen:O[u.id] && O[u.id].last, per:O[u.id] ? O[u.id].per : {} }))
+    .sort((a, b) => String(b.lastOpen || b.lastLogin || '').localeCompare(String(a.lastOpen || a.lastLogin || '')) || (a.u.full_name || a.u.username).localeCompare(b.u.full_name || b.u.username));
+  const did = r => r.logins || r.opens;
+  const rows = allRows.filter(r => !f.status || (f.status === 'yes' ? did(r) : !did(r)));
+  const ids = new Set(allRows.map(r => r.u.id));
+  const perDash = {};
+  (rep.opens || []).filter(x => ids.has(x.user_id)).forEach(x => { const p = perDash[x.dashboard_id] = perDash[x.dashboard_id] || { n:0, users:new Set(), last:null }; p.n += +x.n; p.users.add(x.user_id); if(!p.last || x.last > p.last) p.last = x.last; });
+  return { rows, allRows, perDash, ids };
+}
+
+function drawReport(){
+  const box = $('#repBody'); if(!box || !S.rep) return;
+  const { rows, allRows, perDash, ids } = buildReport(), dn = dashMap(), nm = userMap();
+  const active = allRows.filter(r => r.logins || r.opens), idle = allRows.length - active.length;
+  const totalLogin = allRows.reduce((a, r) => a + r.logins, 0), totalOpen = allRows.reduce((a, r) => a + r.opens, 0);
+  const [from, to] = [S.rep.from, S.rep.to];
+  const card = (n, l, sub='') => `<div class="card" style="padding:14px 16px"><div style="font-size:24px;font-weight:800">${n}</div><div class="t-sub">${l}${sub ? `<br>${sub}` : ''}</div></div>`;
+  const chips = per => Object.entries(per).sort((a,b) => b[1] - a[1]).map(([id, n]) => `<span class="tag" style="margin:2px 4px 2px 0;background:#eff6ff;color:#1e40af">${esc(dn[id] || 'Dashboard terhapus')} · ${n}×</span>`).join('') || '<span class="muted-t">—</span>';
+  const recent = (S.rep.recent || []).filter(e => ids.has(e.user_id)).slice(0, 100);
+  box.innerHTML = `
+    <div class="t-sub" style="margin:-4px 0 12px">Periode: <b>${S.rf.period === 'all' ? 'Sejak awal' : from.toLocaleDateString('id-ID',{day:'numeric',month:'short',year:'numeric'})} – ${new Date(to - 1).toLocaleDateString('id-ID',{day:'numeric',month:'short',year:'numeric'})}</b></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:16px">
+      ${card(`${active.length}<span class="t-sub" style="font-size:14px;font-weight:600"> / ${allRows.length}</span>`, 'Pengguna sudah login', allRows.length ? `${Math.round(active.length / allRows.length * 100)}% dari pengguna` : '')}
+      ${card(totalLogin, 'Total login')}
+      ${card(totalOpen, 'Dashboard dibuka')}
+      ${card(idle, S.rf.period === 'all' ? 'Belum pernah login' : 'Belum login di periode ini')}
+    </div>
+    <div class="card" style="margin-bottom:16px">
+      <div style="padding:12px 16px;font-weight:700;border-bottom:1px solid var(--line)">Per dashboard</div>
+      <table class="tbl"><thead><tr><th>Dashboard</th><th>Dibuka</th><th>Pengguna unik</th><th class="hide-sm">Terakhir dibuka</th></tr></thead><tbody>
+      ${S.dashboards.map(d => { const p = perDash[d.id]; return `<tr><td><div class="t-title"><span class="nav-ic" style="background:#eff6ff">${esc(d.icon || '📊')}</span>${esc(d.title)}</div></td><td><b>${p ? p.n : 0}×</b></td><td>${p ? p.users.size : 0} orang</td><td class="hide-sm">${p ? fmtDate(p.last) : '—'}</td></tr>`; }).join('') || '<tr><td colspan="4" class="empty-state">Belum ada dashboard.</td></tr>'}
+      </tbody></table></div>
+    <div class="card" style="margin-bottom:16px">
+      <div style="padding:12px 16px;font-weight:700;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">Per pengguna
+        <span class="t-sub" style="font-weight:500">${rows.length} pengguna${S.rf.status === 'no' ? ' belum login' : S.rf.status === 'yes' ? ' sudah login' : ''} · ubah lewat filter di atas</span></div>
+      <table class="tbl"><thead><tr><th>NIK</th><th>Nama</th><th>Area</th><th>Login</th><th>Dashboard yang dibuka</th><th class="hide-sm">Aktivitas terakhir</th></tr></thead><tbody>
+      ${rows.map(r => `<tr>
+        <td class="mono" style="background:none;white-space:nowrap">${esc(r.u.nik || '—')}</td>
+        <td><div style="font-weight:700">${esc(r.u.full_name || r.u.username)}</div><div class="t-sub">${r.u.position ? `<span class="tag" style="margin:0 4px 0 0;background:#ede9fe;color:#5b21b6">${esc(r.u.position)}</span>` : ''}${esc(r.u.username)}</div></td>
+        <td>${esc(r.u.area || '—')}</td>
+        <td>${r.logins ? `<b>${r.logins}×</b><div class="t-sub">${fmtDate(r.lastLogin)}${r.lastIp ? '<br>IP ' + esc(r.lastIp) : ''}</div>` : '<span class="pill pill-off">Belum login</span>'}</td>
+        <td style="max-width:420px">${chips(r.per)}</td>
+        <td class="hide-sm">${r.lastOpen || r.lastLogin ? `${fmtDate(r.lastOpen || r.lastLogin)}<div class="t-sub">${ago(r.lastOpen || r.lastLogin)}</div>` : '—'}</td></tr>`).join('') || '<tr><td colspan="6" class="empty-state">Tidak ada pengguna yang cocok.</td></tr>'}
+      </tbody></table></div>
+    <div class="card">
+      <div style="padding:12px 16px;font-weight:700;border-bottom:1px solid var(--line)">Aktivitas terbaru <span class="t-sub" style="font-weight:500">(maks. 100 terakhir · lengkapnya lewat "Unduh log")</span></div>
+      <div style="max-height:360px;overflow:auto"><table class="tbl"><tbody>
+      ${recent.map(e => { const u = nm[e.user_id] || {}; return `<tr><td class="t-sub" style="white-space:nowrap;width:150px">${fmtDate(e.at)}</td><td><b>${esc(u.full_name || u.username || 'Pengguna terhapus')}</b> <span class="t-sub">${esc([u.nik ? 'NIK ' + u.nik : '', u.position, u.area].filter(Boolean).join(' · '))}</span></td>
+        <td>${e.t === 'login' ? '<span class="pill pill-ok">Login</span>' + (e.ip ? ` <span class="t-sub">IP ${esc(e.ip)}</span>` : '') : `Membuka <b>${esc(dn[e.dashboard_id] || 'Dashboard terhapus')}</b>`}</td></tr>`; }).join('') || '<tr><td class="empty-state">Belum ada aktivitas di periode ini.</td></tr>'}
+      </tbody></table></div></div>`;
+}
+
+/* ---------- GANTI PASSWORD (pengguna) ---------- */
+function pwModal(forced){
+  const needPin = forced || !S.hasPin;
+  const m = modal(`
+    <form autocomplete="off">
+      <div class="modal-h"><h3>${forced ? 'Buat password baru' : 'Ganti password'}</h3>${forced ? '' : '<button type="button" class="btn btn-icon btn-sm" data-x>✕</button>'}</div>
+      <div class="modal-b">
+        ${forced ? '<div class="alert alert-info">Anda login dengan password sementara. Silakan buat password baru untuk melanjutkan.</div>' : `
+        <div class="field"><label>Password lama</label><input class="input" type="password" name="old" required autocomplete="current-password"></div>`}
+        <div class="field"><label>Password baru</label><input class="input" type="password" name="pw1" required minlength="${CFG.MIN_PASSWORD}" autocomplete="new-password"><div class="t-sub" style="margin-top:4px">Minimal ${CFG.MIN_PASSWORD} karakter.</div></div>
+        <div class="field" style="${needPin ? '' : 'margin-bottom:0'}"><label>Ulangi password baru</label><input class="input" type="password" name="pw2" required autocomplete="new-password"></div>
+        ${needPin ? `<div class="field" style="margin-bottom:0"><label>PIN pemulihan (6 digit angka)</label><input class="input pin-input" name="pin" inputmode="numeric" maxlength="6" required placeholder="6 digit angka">
+          <div class="t-sub" style="margin-top:4px">Dipakai untuk reset password sendiri lewat <b>Lupa password?</b> di halaman login. Ingat baik-baik dan jangan dibagikan.</div></div>` : ''}
+        <div data-err></div>
+      </div>
+      <div class="modal-f">${forced ? '<button type="button" class="btn" data-out>Keluar</button>' : '<button type="button" class="btn" data-x>Batal</button>'}<button class="btn btn-primary" type="submit" data-save>Simpan password</button></div>
+    </form>`);
+  if(forced) m.el.dataset.lock = '1';
+  const f = m.el.querySelector('form'), err = m.el.querySelector('[data-err]');
+  const out = m.el.querySelector('[data-out]'); if(out) out.onclick = () => { m.close(); logout(); };
+  setTimeout(() => (f.old || f.pw1).focus(), 50);
+  if(f.pin) f.pin.oninput = () => { f.pin.value = f.pin.value.replace(/\D/g, '').slice(0, 6); };
+  f.onsubmit = async e => {
+    e.preventDefault(); err.innerHTML = '';
+    const show = t => err.innerHTML = `<div class="alert alert-err" style="margin:14px 0 0">${esc(t)}</div>`;
+    if(f.pw1.value.length < CFG.MIN_PASSWORD) return show(`Password minimal ${CFG.MIN_PASSWORD} karakter.`);
+    if(f.pw1.value !== f.pw2.value) return show('Ulangi password tidak sama.');
+    if(f.pin && !/^\d{6}$/.test(f.pin.value)) return show('PIN pemulihan harus 6 digit angka.');
+    const btn = m.el.querySelector('[data-save]'); btn.disabled = true; btn.textContent = 'Menyimpan…';
+    try { await api.changeOwnPassword(forced ? null : f.old.value, f.pw1.value); S.profile.must_change_password = false;
+      if(f.pin){ await api.setRecoveryPin(f.pin.value, null); S.hasPin = true; }
+      m.close(); toast(f.pin ? 'Password & PIN pemulihan tersimpan.' : 'Password berhasil diganti.', 'ok'); }
+    catch(ex){ btn.disabled = false; btn.textContent = 'Simpan password'; show(ex.message || String(ex)); }
+  };
+}
+
+function pinModal(prompt){
+  const m = modal(`
+    <form autocomplete="off">
+      <div class="modal-h"><h3>${S.hasPin ? 'Ubah PIN pemulihan' : 'Buat PIN pemulihan'}</h3><button type="button" class="btn btn-icon btn-sm" data-x>✕</button></div>
+      <div class="modal-b">
+        <div class="alert alert-info">PIN 6 digit ini dipakai untuk <b>reset password sendiri</b> lewat tombol <b>Lupa password?</b> di halaman login. Jangan bagikan ke siapa pun.</div>
+        ${prompt ? '' : '<div class="field"><label>Password saat ini</label><input class="input" type="password" name="cur" required autocomplete="current-password"></div>'}
+        <div class="field"><label>PIN baru</label><input class="input pin-input" name="pin1" inputmode="numeric" maxlength="6" required placeholder="6 digit angka"></div>
+        <div class="field" style="margin-bottom:0"><label>Ulangi PIN</label><input class="input pin-input" name="pin2" inputmode="numeric" maxlength="6" required placeholder="6 digit angka"></div>
+        <div data-err></div>
+      </div>
+      <div class="modal-f"><button type="button" class="btn" data-x>${prompt ? 'Nanti saja' : 'Batal'}</button><button class="btn btn-primary" type="submit" data-save>Simpan PIN</button></div>
+    </form>`);
+  const f = m.el.querySelector('form'), err = m.el.querySelector('[data-err]');
+  [f.pin1, f.pin2].forEach(i => i.oninput = () => { i.value = i.value.replace(/\D/g, '').slice(0, 6); });
+  setTimeout(() => (f.cur || f.pin1).focus(), 50);
+  f.onsubmit = async e => {
+    e.preventDefault(); err.innerHTML = '';
+    const show = t => err.innerHTML = `<div class="alert alert-err" style="margin:14px 0 0">${esc(t)}</div>`;
+    if(!/^\d{6}$/.test(f.pin1.value)) return show('PIN harus 6 digit angka.');
+    if(f.pin1.value !== f.pin2.value) return show('Ulangi PIN tidak sama.');
+    if(/^(\d)\1{5}$/.test(f.pin1.value) || '0123456789'.includes(f.pin1.value) || '9876543210'.includes(f.pin1.value)) return show('PIN terlalu mudah ditebak (mis. 111111 / 123456). Pilih PIN lain.');
+    const btn = m.el.querySelector('[data-save]'); btn.disabled = true; btn.textContent = 'Menyimpan…';
+    try { await api.setRecoveryPin(f.pin1.value, prompt ? null : f.cur.value); S.hasPin = true; m.close(); toast('PIN pemulihan tersimpan.', 'ok'); }
+    catch(ex){ btn.disabled = false; btn.textContent = 'Simpan PIN'; show(ex.message || String(ex)); }
+  };
+}
+
+/* ============================================================ */
+if(!CONFIGURED){ showLogin('Portal belum dikonfigurasi. Admin perlu mengisi SUPABASE_URL dan SUPABASE_ANON_KEY di config.js.'); $('#lgBtn').disabled = true; return; }
+if(!DEMO && !window.supabase){ showLogin('Library Supabase gagal dimuat. Periksa koneksi internet lalu muat ulang halaman.'); return; }
+boot();
+})();
+</script>
+</body>
+</html>
