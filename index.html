@@ -515,6 +515,10 @@ const safeName = n => (n||'dashboard.html').normalize('NFKD').replace(/[^\w.\-]+
 const toEmail = id => { id = id.trim().toLowerCase(); return id.includes('@') ? id : id + '@' + CFG.USERNAME_DOMAIN; };
 const deviceOf = ua => { if(!ua) return '—'; const os = /Windows/.test(ua)?'Windows':/Android/.test(ua)?'Android':/iPhone|iPad/.test(ua)?'iOS':/Mac OS/.test(ua)?'macOS':/Linux/.test(ua)?'Linux':'Lainnya';
   const br = /Edg\//.test(ua)?'Edge':/OPR\//.test(ua)?'Opera':/Chrome\//.test(ua)?'Chrome':/Firefox\//.test(ua)?'Firefox':/Safari\//.test(ua)?'Safari':'Browser'; return br+' · '+os; };
+async function isHtmlFile(f){   // HP Android sering memberi tipe file aneh: cek nama ATAU isi awal file
+  if(/\.html?$/i.test(f.name || '')) return true;
+  try { const h = (await f.slice(0, 4096).text()).toLowerCase(); return h.includes('<html') || h.includes('<!doctype html'); } catch(e){ return false; }
+}
 async function titleFromFile(file){ try { const head = await file.slice(0, 200000).text(); const m = head.match(/<title[^>]*>([\s\S]*?)<\/title>/i); if(m){ const t=document.createElement('textarea'); t.innerHTML=m[1].trim(); return t.value; } } catch(e){} return file.name.replace(/\.html?$/i,'').replace(/[_-]+/g,' '); }
 
 const genPw = () => { const a = 'abcdefghjkmnpqrstuvwxyz', d = '23456789', r = n => crypto.getRandomValues(new Uint32Array(1))[0] % n; let s = ''; for(let i=0;i<4;i++) s += a[r(a.length)]; for(let i=0;i<4;i++) s += d[r(d.length)]; return s; };
@@ -1291,7 +1295,7 @@ function renderAdminDash(){
   $('#adminActs').innerHTML = `
     <label class="btn" title="Pilih beberapa file HTML sekaligus; judul diambil dari &lt;title&gt; tiap file">
       <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v4h16v-4"/></svg>Unggah banyak
-      <input type="file" id="bulkInput" accept=".html,.htm,text/html" multiple hidden></label>
+      <input type="file" id="bulkInput" accept=".html,.htm,text/html,application/octet-stream,*/*" multiple hidden></label>
     <button class="btn" id="btnAddLink"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>Tambah link</button>
     <button class="btn btn-primary" id="btnAdd"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Tambah dashboard</button>`;
   $('#btnAdd').onclick = () => dashModal(null);
@@ -1462,7 +1466,7 @@ function dashModal(d, replaceOnly=false){
             ${d ? `<div class="t-sub" style="margin-top:6px">File saat ini: ${esc(d.file_name || '—')} (${fmtSize(d.file_size)})</div>` : ''}
             <div class="fname" data-fname></div>
           </div>
-          <input type="file" name="file" accept=".html,.htm,text/html" hidden>
+          <input type="file" name="file" accept=".html,.htm,text/html,application/octet-stream,*/*" hidden>
           <div class="progress hidden" data-prog><div></div></div>
         </div>
         <div data-err></div>
@@ -1477,7 +1481,7 @@ function dashModal(d, replaceOnly=false){
   back.addEventListener('mousedown', e => { if(e.target === back) close(); });
   const setFile = async fl => {
     if(!fl) return;
-    if(!/\.html?$/i.test(fl.name)){ toast('Pilih file .html', 'err'); return; }
+    if(!(await isHtmlFile(fl))){ toast('Pilih file dashboard .html', 'err'); return; }
     file = fl; back.querySelector('[data-fname]').textContent = `✓ ${fl.name} (${fmtSize(fl.size)})`;
     if(isNew && !f.title.value) f.title.value = await titleFromFile(fl);
   };
@@ -1548,7 +1552,7 @@ function linkModal(d){
 }
 
 async function bulkUpload(files){
-  files = files.filter(f => /\.html?$/i.test(f.name));
+  const okF = []; for(const f of files){ if(await isHtmlFile(f)) okF.push(f); } files = okF;
   if(!files.length) return;
   let order = nextOrder(), ok = 0;
   for(const [i, file] of files.entries()){
