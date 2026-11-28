@@ -797,9 +797,14 @@ const GH = {
       blobs.push({ path:a.path, mode:'100644', type:'blob', sha:b.sha });
     }
     let done = null;
-    for(let attempt = 0; attempt < 6 && !done; attempt++){
-      if(attempt) await new Promise(r => setTimeout(r, 700 * attempt));
-      const ref = await this.call(`/git/ref/heads/${CFG.GITHUB_BRANCH}`);
+    const B = CFG.GITHUB_BRANCH, TRIES = 9;
+    for(let attempt = 0; attempt < TRIES && !done; attempt++){
+      if(attempt) await new Promise(r => setTimeout(r, 900 * attempt));
+      // Setelah "ringkas riwayat" (force push), API GitHub kadang masih memberi posisi lama beberapa detik.
+      // Coba posisi terakhir yang kita tulis sendiri dulu, lalu bergantian dua endpoint berbeda.
+      const headSha = (attempt === 0 && this._head) ? this._head
+        : (attempt % 2 ? (await this.call(`/branches/${B}`)).commit.sha : (await this.call(`/git/ref/heads/${B}`)).object.sha);
+      const ref = { object: { sha: headSha } };
       const head = await this.call(`/git/commits/${ref.object.sha}`);
       const tree = [...blobs];
       if(removes.length){
@@ -810,15 +815,15 @@ const GH = {
       if(!tree.length) return;
       const nt = await this.call('/git/trees', { method:'POST', body:{ base_tree:head.tree.sha, tree } });
       const c = await this.call('/git/commits', { method:'POST', body:{ message, tree:nt.sha, parents:[ref.object.sha] } });
-      try { await this.call(`/git/refs/heads/${CFG.GITHUB_BRANCH}`, { method:'PATCH', body:{ sha:c.sha, force:false } }); done = { c, tree:nt.sha }; }
-      catch(e){ if(!/ 409| 422/.test(e.message) || attempt === 5) throw e; }
+      try { await this.call(`/git/refs/heads/${B}`, { method:'PATCH', body:{ sha:c.sha, force:false } }); done = { c, tree:nt.sha }; this._head = c.sha; }
+      catch(e){ if(!/ 409| 422/.test(e.message) || attempt === TRIES - 1) throw e; this._head = null; }
     }
     if(!CFG.GITHUB_KEEP_HISTORY){
       try {
         const now = await this.call(`/git/ref/heads/${CFG.GITHUB_BRANCH}`);
         if(now.object.sha === done.c.sha){
           const o = await this.call('/git/commits', { method:'POST', body:{ message, tree:done.tree, parents:[] } });
-          await this.call(`/git/refs/heads/${CFG.GITHUB_BRANCH}`, { method:'PATCH', body:{ sha:o.sha, force:true } });
+          await this.call(`/git/refs/heads/${CFG.GITHUB_BRANCH}`, { method:'PATCH', body:{ sha:o.sha, force:true } }); this._head = o.sha;
         }
       } catch(e){ /* ringkas riwayat opsional; isi file sudah aman */ }
     }
