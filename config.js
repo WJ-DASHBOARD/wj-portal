@@ -40,6 +40,9 @@ window.PORTAL_CONFIG = {
   HEARTBEAT_SECONDS: 30,
   BLOCK_STALE_SECONDS: 120,
 
+  // Keluar otomatis jika tidak ada aktivitas (menit). 0 = tidak pernah keluar otomatis.
+  IDLE_MINUTES: 60,
+
   // Simpan dashboard di browser pengguna supaya tidak diunduh ulang
   // (hemat kuota download Supabase). Unduh ulang hanya jika admin "Ganti file".
   CACHE_DASHBOARDS: true,
